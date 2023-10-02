@@ -9,7 +9,7 @@ export default function Custom_btn() {
   return (
     <Ionicons
       onPress={() => {
-        Context?.getCity();
+        Context.fetchCity();
       }}
       style={styles.icon_button}
       name="search"
