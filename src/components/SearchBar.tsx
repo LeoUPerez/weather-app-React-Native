@@ -9,14 +9,14 @@ export default function SearchBar() {
   return (
     <TextInput
       onChangeText={(value) => Context.setSearchCity(value.trim())}
-      style={styles.input}
+      style={styles.Input}
       placeholder="Hola"
     />
   );
 }
 
 const styles = StyleSheet.create({
-  input: {
+  Input: {
     width: "82%",
     height: 40,
     marginTop: 12,

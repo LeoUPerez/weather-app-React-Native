@@ -19,32 +19,32 @@ export default function IconInfo({
   const Context = useContext(globalContext);
 
   return (
-    <View style={styles.icon_info_container}>
+    <View style={styles.IconInfoContainer}>
       <Ionicons name={name} size={30} color={"rgb(33, 97, 140)"} />
-      <Text style={styles.data_style}>
+      <Text style={styles.DataStyle}>
         {data != undefined ? data : defaultData}
         <Text>
           {text == "Wind speed" ? " km/h" : text != "Temp. max" ? "%" : "°"}
         </Text>
       </Text>
 
-      <Text style={styles.text_style}>{text}</Text>
+      <Text style={styles.TextStyle}>{text}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  icon_info_container: {
+  IconInfoContainer: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
-  text_style: {
+  TextStyle: {
     color: "rgba(69,121,241,.4)",
     fontWeight: "bold",
     fontSize: 15,
   },
-  data_style: {
+  DataStyle: {
     color: "rgb(33, 97, 140)",
     fontWeight: "bold",
     fontSize: 15,

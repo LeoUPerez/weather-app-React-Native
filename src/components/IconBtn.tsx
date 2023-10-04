@@ -12,13 +12,13 @@ export default function IconBtn({ text, name }: PropsType) {
   const Context = useContext(globalContext);
 
   return (
-    <View style={styles.container_btn}>
-      <Text style={styles.text_style}>{text}</Text>
+    <View style={styles.ContainerBtn}>
+      <Text style={styles.TextStyle}>{text}</Text>
       <Ionicons
         onPress={() => {
           // Context.fetchCity();
         }}
-        style={styles.icon_button}
+        style={styles.IconButton}
         name={name}
       />
     </View>
@@ -26,16 +26,16 @@ export default function IconBtn({ text, name }: PropsType) {
 }
 
 const styles = StyleSheet.create({
-  icon_button: {
+  IconButton: {
     fontSize: 25,
     color: "rgb(33, 97, 140)"
   },
-  container_btn: {
+  ContainerBtn: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
   },
-  text_style: {
+  TextStyle: {
     fontWeight: "bold",
     color: "rgb(33, 97, 140)",
   },

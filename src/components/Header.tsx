@@ -4,7 +4,7 @@ import IconBtn from "./IconBtn";
 
 export default function Header() {
   return (
-    <View style={styles.header}>
+    <View style={styles.Header}>
       <SearchBar />
       <IconBtn text="" name="search"/>
     </View>
@@ -12,7 +12,7 @@ export default function Header() {
 }
 
 const styles = StyleSheet.create({
-    header: {
+    Header: {
         display:"flex",
         flexDirection: "row",
         alignItems: "center",

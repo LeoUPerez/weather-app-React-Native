@@ -6,7 +6,7 @@ import { globalContext } from "../context/GlobalContext";
 export default function EstimatedDayForecast() {
   const Context = useContext(globalContext);
   return (
-    <View style={styles.estimates_container_styles}>
+    <View style={styles.EstimatesContainerStyles}>
       <IconInfo
         name="thermometer"
         text="Temp. max"
@@ -30,7 +30,7 @@ export default function EstimatedDayForecast() {
 }
 
 const styles = StyleSheet.create({
-  estimates_container_styles: {
+  EstimatesContainerStyles: {
     width: "80%",
     height: "30%",
     backgroundColor: "white",

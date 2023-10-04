@@ -11,16 +11,16 @@ export default function EstimatedDayTemp() {
       colors={["rgba(69,121,241,255)", "transparent"]}
       end={{ x: 2, y: 0 }}
       start={{ x: 0, y: 1 }}
-      style={styles.gradient_box}
+      style={styles.GradientBox}
     >
-      <Text style={styles.temp_text_style}>
+      <Text style={styles.TempTextStyle}>
         {Context?.city != undefined
           ? Context?.city?.main.temp.toString().split(".")[0]
           : 0}
         °
       </Text>
       <Image
-        style={styles.image}
+        style={styles.Image}
         source={require("../assets/images/clear.png")}
       />
     </LinearGradient>
@@ -28,14 +28,14 @@ export default function EstimatedDayTemp() {
 }
 
 const styles = StyleSheet.create({
-  gradient_box: {
+  GradientBox: {
     width: "70%",
     height: "60%",
     borderRadius: 20,
     marginTop: "3%",
     position: "relative",
   },
-  temp_text_style: {
+  TempTextStyle: {
     fontWeight: "900",
     fontSize: 140,
     textAlign: "right",
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     marginTop: "-10%",
   },
-  image: {
+  Image: {
     position: "absolute",
     bottom: "-10%",
     left: "-15%",
