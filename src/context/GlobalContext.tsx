@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, createContext, useState } from "react";
-import { City } from "../models/city_model";
+import { City } from "../models/CityModel";
 import { Alert } from "react-native";
 
 type ContextProviderProps = {
