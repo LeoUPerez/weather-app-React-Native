@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, createContext, useState } from "react";
 import { City } from "../models/city_model";
+import { Alert } from "react-native";
 
 type ContextProviderProps = {
   children: React.ReactNode;
@@ -25,19 +26,26 @@ export const ContexProvider = ({ children }: ContextProviderProps) => {
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${APIID}&units=metric`
     )
-      .then((response) => response.json())
-      .then((data) => {
-        setCity(data); 
-        // console.log(data["main"]["temp"])
+      .then(async (response) => {
+        if (response.ok) {
+          setCity(await response.json());
+        } else {
+          Alert.alert("Weather App Alert", "City not found");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+
+    //   // city?.weather[0].id
+    //   // console.log(data["main"]["temp"])
     //! city?.weather[0].main
   };
 
   return (
-    <globalContext.Provider value={{ fetchCity, searchCity, city, setSearchCity }}>
+    <globalContext.Provider
+      value={{ fetchCity, searchCity, city, setSearchCity }}
+    >
       {children}
     </globalContext.Provider>
   );
