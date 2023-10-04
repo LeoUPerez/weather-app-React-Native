@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <View style={styles.header}>
       <SearchBar />
-      <Custom_btn />
+      <Custom_btn text="" name="search"/>
     </View>
   );
 }
