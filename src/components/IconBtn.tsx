@@ -15,8 +15,8 @@ export default function IconBtn({ text, name }: PropsType) {
     <View style={styles.ContainerBtn}>
       <Text style={styles.TextStyle}>{text}</Text>
       <Ionicons
-        onPress={() => {
-          // Context.fetchCity();
+        onPress={async () => {
+          Context.fetchCity();
         }}
         style={styles.IconButton}
         name={name}
@@ -28,7 +28,7 @@ export default function IconBtn({ text, name }: PropsType) {
 const styles = StyleSheet.create({
   IconButton: {
     fontSize: 25,
-    color: "rgb(33, 97, 140)"
+    color: "rgb(33, 97, 140)",
   },
   ContainerBtn: {
     display: "flex",
