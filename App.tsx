@@ -3,19 +3,12 @@ import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 import { ContexProvider } from "./src/context/global_Context";
 import HomeView from "./src/views/home_View";
 
-export default function App() {
-  const windowHeight = Dimensions.get("window").height;
+const windowHeight = Dimensions.get("window").height;
 
+export default function App() {
   return (
     <ScrollView>
-      <View
-        style={{
-          backgroundColor: "rgba(13, 151, 242, 0.15)",
-          width: "100%",
-          minHeight: windowHeight,
-          marginTop: 30,
-        }}
-      >
+      <View style={styles.container_style}>
         <ContexProvider>
           <HomeView />
         </ContexProvider>
@@ -23,3 +16,12 @@ export default function App() {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  container_style: {
+    backgroundColor: "rgba(13, 151, 242, 0.15)",
+    width: "100%",
+    minHeight: windowHeight,
+    marginTop: 30,
+  },
+});
