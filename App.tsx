@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
-import { ContexProvider } from "./src/context/global_Context";
-import HomeView from "./src/views/home_View";
+import { ContexProvider } from "./src/context/GlobalContext";
+import HomeView from "./src/views/Home";
 
 const windowHeight = Dimensions.get("window").height;
 

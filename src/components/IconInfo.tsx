@@ -1,7 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { globalContext } from "../context/global_Context";
+import { globalContext } from "../context/GlobalContext";
 
 type PropsType = {
   name: "thermometer" | "water" | "md-cloud";
@@ -10,7 +10,7 @@ type PropsType = {
   defaultData: string;
 };
 
-export default function Icon_info({
+export default function IconInfo({
   name,
   text,
   defaultData,

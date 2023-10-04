@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useContext } from "react";
-import { globalContext } from "../context/global_Context";
+import { globalContext } from "../context/GlobalContext";
 
 type PropsType = {
   text: string;
   name: "search" | "chevron-forward-outline";
 };
 
-export default function Icon_btn({ text, name }: PropsType) {
+export default function IconBtn({ text, name }: PropsType) {
   const Context = useContext(globalContext);
 
   return (

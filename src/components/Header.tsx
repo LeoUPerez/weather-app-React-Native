@@ -1,12 +1,12 @@
 import { View, StyleSheet } from "react-native";
-import SearchBar from "./Search_bar";
-import Custom_btn from "./Icon_btn";
+import SearchBar from "./SearchBar";
+import IconBtn from "./IconBtn";
 
 export default function Header() {
   return (
     <View style={styles.header}>
       <SearchBar />
-      <Custom_btn text="" name="search"/>
+      <IconBtn text="" name="search"/>
     </View>
   );
 }

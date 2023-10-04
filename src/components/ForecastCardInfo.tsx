@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 
 
-export default function Forecast_card_info() {
+export default function ForecastCardInfo() {
     return (
         <View style={styles.card_style}>
 
@@ -13,9 +13,9 @@ export default function Forecast_card_info() {
 const styles = StyleSheet.create({
     card_style:{
         width: 85,
-        height: "100%",
+        height: 110,
         marginHorizontal: 4,
-        backgroundColor: "yellow",
+        backgroundColor: "blue",
         borderRadius: 15
     }
 })
