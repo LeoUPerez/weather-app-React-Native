@@ -1,7 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { View, Text, StyleSheet, Image, FlatList } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList, Alert } from "react-native";
 import { globalContext } from "../context/GlobalContext";
-import { useContext, useEffect } from "react";
+import { SetStateAction, useContext, useEffect, useState } from "react";
 import ForecastCardInfo from "../components/ForecastCardInfo";
 import Header from "../components/Header";
 import Icon_btn from "../components/IconBtn";
@@ -11,11 +11,6 @@ import EstimatedDayTemp from "../components/EstimatedDayTemp";
 export default function HomeView() {
   const Context = useContext(globalContext);
 
-  useEffect(() => {
-    if (Context.city != undefined) {
-      Context.FetchForecastCity();
-    }
-  }, [Context.city]);
 
   return (
     <View style={styles.container}>
@@ -35,7 +30,7 @@ export default function HomeView() {
         <FlatList
           horizontal={true}
           data={Context.forecastCity?.list}
-          renderItem={() => <ForecastCardInfo />}
+          renderItem={(item) => <ForecastCardInfo data={item} />}
         />
       </View>
     </View>
