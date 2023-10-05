@@ -16,7 +16,7 @@ type ContextProviderProps = {
 type ContextType = {
   fetchCity: () => void;
   forecastCity: Forecast | undefined;
-  FetchForecastCity: () => void;
+  FetchForecastCity: (lat: number, lon: number) => void;
   city?: City;
   searchCity: string;
   setSearchCity: Dispatch<SetStateAction<string>>;
@@ -40,15 +40,9 @@ export const ContexProvider = ({ children }: ContextProviderProps) => {
     )
       .then(async (response) => {
         if (response.ok) {
-          setCity(await response.json());
-
-          // var lamaituya = await ;
-          // setCoords({
-          //   lat: respons["coord"]["lat"],
-          //   lon: respons["coord"]["lon"],
-          // });
-
-          // prueba();
+          var city: City = await response.json();
+          setCity(city);
+          FetchForecastCity(city.coord.lat, city.coord.lon);
         } else {
           Alert.alert("Weather App Alert", "City not found");
         }
@@ -58,22 +52,29 @@ export const ContexProvider = ({ children }: ContextProviderProps) => {
       });
 
     // console.log(city!?.coord!?.lat, city!?.coord!?.lon, APIID);
-    //   // city?.weather[0].id
-    //   // console.log(data["main"]["temp"])
+      // city?.weather[0].id
+      // console.log(data["main"]["temp"])
     //! city?.weather[0].main
   };
 
   return (
     <globalContext.Provider
-      value={{ fetchCity, FetchForecastCity, searchCity, city, forecastCity, setSearchCity }}
+      value={{
+        fetchCity,
+        FetchForecastCity,
+        searchCity,
+        city,
+        forecastCity,
+        setSearchCity,
+      }}
     >
       {children}
     </globalContext.Provider>
   );
-  function FetchForecastCity() {
+  function FetchForecastCity(lat: number, lon: number) {
     const APIID = "8926fd8755940c0fb62183daa7f7ebe6";
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${city?.coord.lat}&lon=${city?.coord.lon}&appid=${APIID}`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIID}&units=metric`
     ).then(async (response) => {
       setForecastCity(await response.json());
     });
