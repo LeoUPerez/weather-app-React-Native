@@ -1,11 +1,37 @@
 import { StatusBar } from "expo-status-bar";
-import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { ContexProvider } from "./src/context/GlobalContext";
 import HomeView from "./src/views/Home";
+import { SetStateAction, useEffect, useState } from "react";
+import * as Location from "expo-location";
 
 const windowHeight = Dimensions.get("window").height;
 
 export default function App() {
+  const [location, setLocation] =
+    useState<SetStateAction<Location.LocationObject>>();
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      // setLocation(location);
+      console.log(location);
+    })();
+  }, []);
+
   return (
     <ScrollView>
       <View style={styles.container_style}>
