@@ -15,8 +15,8 @@ export default function IconBtn({ text, name }: PropsType) {
     <View style={styles.ContainerBtn}>
       <Text style={styles.TextStyle}>{text}</Text>
       <Ionicons
-        onPress={async () => {
-          Context.fetchCity();
+        onPress={ () => {
+          Context.fetchCityName();
         }}
         style={styles.IconButton}
         name={name}
