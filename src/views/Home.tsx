@@ -7,10 +7,25 @@ import Header from "../components/Header";
 import Icon_btn from "../components/IconBtn";
 import EstimatedDayForecast from "../components/EstimatedDayForecast";
 import EstimatedDayTemp from "../components/EstimatedDayTemp";
+import * as Location from "expo-location";
 
 export default function HomeView() {
   const Context = useContext(globalContext);
 
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+
+      if (status === "granted") {
+        let location = await Location.getCurrentPositionAsync({});
+        Context.fetchCityLatLon(
+          location.coords.latitude,
+          location.coords.longitude
+        );
+        return;
+      }
+    })();
+  }, []);
 
   return (
     <View style={styles.container}>
