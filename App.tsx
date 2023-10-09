@@ -10,6 +10,7 @@ import {
 import { ContexProvider, globalContext } from "./src/context/GlobalContext";
 import HomeView from "./src/views/Home";
 import { SetStateAction, useContext, useEffect, useState } from "react";
+import RouterNavigator from "./src/routes/Router";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -18,7 +19,7 @@ export default function App() {
     <ScrollView>
       <View style={styles.container_style}>
         <ContexProvider>
-          <HomeView />
+          <RouterNavigator />
         </ContexProvider>
       </View>
     </ScrollView>
