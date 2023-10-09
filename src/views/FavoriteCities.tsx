@@ -1,8 +1,16 @@
-import { Text, View } from "react-native"
+import { Text, View } from "react-native";
 
-export default function CitiesView() {
-    return (
-        <>
-        </>
-    )
+
+export default function CitiesFavView() {
+  return (
+    <View
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text>CIties Fav View</Text>
+    </View>
+  );
 }
