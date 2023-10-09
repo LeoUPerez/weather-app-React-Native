@@ -6,9 +6,9 @@ import CitiesFavView from "../views/FavoriteCities";
 const Stack = createNativeStackNavigator<IRouteName>();
 
 export const Routes = {
-    FavoriteCity: 'FavoriteCity',
-    Home: 'Home'
-}
+  FavoriteCity: "FavoriteCity",
+  Home: "Home",
+};
 
 export default function RouterNavigator() {
   return (
@@ -17,6 +17,6 @@ export default function RouterNavigator() {
         <Stack.Screen name={Routes.Home} component={HomeView} />
         <Stack.Screen name={Routes.FavoriteCity} component={CitiesFavView} />
       </Stack.Navigator>
-    </NavigationContainer>
+     </NavigationContainer>
   );
 }

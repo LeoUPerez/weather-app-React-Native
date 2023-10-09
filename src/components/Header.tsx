@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <View style={styles.Header}>
       <SearchBar />
-      <IconBtn name="search"/>
+      <IconBtn name="search" text=""/>
     </View>
   );
 }
@@ -16,6 +16,5 @@ const styles = StyleSheet.create({
         display:"flex",
         flexDirection: "row",
         alignItems: "center",
-        // position: 'relative'
     }
 })
