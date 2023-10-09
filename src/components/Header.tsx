@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <View style={styles.Header}>
       <SearchBar />
-      <IconBtn text="" name="search"/>
+      <IconBtn name="search"/>
     </View>
   );
 }

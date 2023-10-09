@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { globalContext } from "../context/GlobalContext";
 
-type PropsType = {
+interface PropsType {
   name: "thermometer" | "water" | "md-cloud";
   text: string;
   data: number | string;

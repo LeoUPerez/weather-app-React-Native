@@ -2,13 +2,18 @@ import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useContext } from "react";
 import { globalContext } from "../context/GlobalContext";
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Routes } from "../routes/Router";
+import PropTypes from 'prop-types';
 
-type PropsType = {
-  text: string;
+interface PropsType {
+  text?: string;
   name: "search" | "chevron-forward-outline";
 };
 
-export default function IconBtn({ text, name }: PropsType) {
+function IconBtn({ text, name }: PropsType) {
+  const navigation = useNavigation<NativeStackNavigationProp<IRouteName>>();
   const Context = useContext(globalContext);
 
   return (
@@ -16,13 +21,21 @@ export default function IconBtn({ text, name }: PropsType) {
       <Text style={styles.TextStyle}>{text}</Text>
       <Ionicons
         onPress={ () => {
-          Context.fetchCityName();
+          // Context.fetchCityName();
+          navigation.navigate(Routes.FavoriteCity);
         }}
         style={styles.IconButton}
         name={name}
       />
     </View>
   );
+}
+
+IconBtn.displayName = "IconBtn";
+
+IconBtn.propTypes = {
+  text: PropTypes.string.isRequired,
+  name: PropTypes.oneOf(['search', "chevron-forward-outline"])
 }
 
 const styles = StyleSheet.create({
@@ -40,3 +53,5 @@ const styles = StyleSheet.create({
     color: "rgb(33, 97, 140)",
   },
 });
+
+export default IconBtn;

@@ -9,11 +9,11 @@ import { City } from "../models/CityModel";
 import { Alert } from "react-native";
 import { Forecast } from "../models/ForecastModel";
 
-type ContextProviderProps = {
+interface ContextProviderProps {
   children: React.ReactNode;
 };
 
-type ContextType = {
+interface ContextType {
   fetchCityName: () => void;
   fetchCityLatLon: (lat: number, lon: number) => void;
   forecastCity: Forecast | undefined;

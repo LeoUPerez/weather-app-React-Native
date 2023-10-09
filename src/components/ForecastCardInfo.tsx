@@ -2,7 +2,7 @@ import { ListRenderItemInfo, StyleSheet, Text, View } from "react-native";
 import { City } from "../models/CityModel";
 import { List } from "../models/ForecastModel";
 
-type PropsType = {
+interface PropsType {
     data: ListRenderItemInfo<List>
 }
 
