@@ -1,15 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  Alert,
-  Dimensions,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-import { ContexProvider, globalContext } from "./src/context/GlobalContext";
-import HomeView from "./src/views/Home";
-import { SetStateAction, useContext, useEffect, useState } from "react";
+import { Dimensions, ScrollView, StyleSheet, View } from "react-native";
+import { ContexProvider } from "./src/context/GlobalContext";
 import RouterNavigator from "./src/routes/Router";
 
 const windowHeight = Dimensions.get("window").height;
