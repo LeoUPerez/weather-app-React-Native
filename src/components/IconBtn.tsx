@@ -3,27 +3,31 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useContext } from "react";
 import { globalContext } from "../context/GlobalContext";
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Routes } from "../routes/Router";
+// import { Routes } from "../routes/Router";
+
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
+import { RootStackPramList } from "../@types/stack-navigation";
+// import { navigate } from "../routes/Router";
 
 interface PropsType {
   text: string;
   name: "search" | "chevron-forward-outline";
 }
+// export type NavigationProps = NativeStackScreenProps<RootStackPramList>;
 
 function IconBtn({ text, name }: PropsType) {
-  const navigation = useNavigation<NativeStackNavigationProp<IRouteName>>();
+  const navi =
+    useNavigation<NativeStackNavigationProp<RootStackPramList>>();
+
   const Context = useContext(globalContext);
 
-  
   return (
     <TouchableOpacity
-    style={styles.ContainerBtn}
-    onPress={() => {
-      // Context.fetchCityName();
-      // navigation.navigate()
-      navigation.push(Routes.FavoriteCity);
-      }}
+      style={styles.ContainerBtn}
+      onPress={() => navi.navigate("FavoriteCity")}
     >
       <Text style={styles.TextStyle}>{text}</Text>
       <Ionicons name={name} style={styles.IconButton}></Ionicons>
