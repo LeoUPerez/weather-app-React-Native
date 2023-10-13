@@ -15,19 +15,19 @@ import { RootStackPramList } from "../@types/stack-navigation";
 interface PropsType {
   text: string;
   name: "search" | "chevron-forward-outline";
+  func: () => void
 }
 // export type NavigationProps = NativeStackScreenProps<RootStackPramList>;
 
-function IconBtn({ text, name }: PropsType) {
-  const navi =
-    useNavigation<NativeStackNavigationProp<RootStackPramList>>();
+function IconBtn({ text, name, func }: PropsType) {
+  // const navi = useNavigation<NativeStackNavigationProp<RootStackPramList>>();
 
   const Context = useContext(globalContext);
 
   return (
     <TouchableOpacity
       style={styles.ContainerBtn}
-      onPress={() => navi.navigate("FavoriteCity")}
+      onPress={() => func()} //navi.navigate("FavoriteCity")
     >
       <Text style={styles.TextStyle}>{text}</Text>
       <Ionicons name={name} style={styles.IconButton}></Ionicons>
