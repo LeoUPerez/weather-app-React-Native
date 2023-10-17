@@ -1,9 +1,10 @@
 import { useEffect, useContext, useRef } from "react";
 import { TextInput, StyleSheet } from "react-native";
 import * as Device from "expo-device";
-import { globalContext } from "../context/GlobalContext";
+import { globalContext } from "../../context/GlobalContext";
+import { styles } from "./style";
 
-export default function SearchBar() {
+const SearchBar = () => {
   const Context = useContext(globalContext);
 
   return (
@@ -13,15 +14,6 @@ export default function SearchBar() {
       placeholder="Hola"
     />
   );
-}
+};
 
-const styles = StyleSheet.create({
-  Input: {
-    width: "82%",
-    height: 40,
-    marginTop: 12,
-    borderWidth: 1,
-    borderRadius: 8,
-    padding: 10,
-  },
-});
+export { SearchBar };

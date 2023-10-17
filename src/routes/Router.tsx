@@ -1,8 +1,8 @@
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp, NativeStackScreenProps, createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeView from "../views/Home";
-import CitiesFavView from "../views/FavoriteCities";
 import { RootStackPramList } from "../@types/stack-navigation";
+import { HomeView } from "../views/Home";
+import { CitiesFavView } from "../views/FavoriteCities";
 
 
 // export const Routes = {

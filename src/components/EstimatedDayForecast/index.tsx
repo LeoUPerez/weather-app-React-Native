@@ -1,9 +1,10 @@
-import IconInfo from "./IconInfo";
 import { StyleSheet, View } from "react-native";
 import { useContext } from "react";
-import { globalContext } from "../context/GlobalContext";
+import { globalContext } from "../../context/GlobalContext";
+import { styles } from "./style";
+import { IconInfo } from "../IconInfo";
 
-export default function EstimatedDayForecast() {
+const EstimatedDayForecast = () => {
   const Context = useContext(globalContext);
   return (
     <View style={styles.EstimatesContainerStyles}>
@@ -27,19 +28,6 @@ export default function EstimatedDayForecast() {
       />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  EstimatesContainerStyles: {
-    width: "80%",
-    height: "30%",
-    backgroundColor: "white",
-    borderRadius: 15,
-    elevation: 10,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    shadowColor: "black",
-  },
-});
-
+export { EstimatedDayForecast };

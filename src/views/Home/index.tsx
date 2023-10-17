@@ -1,31 +1,30 @@
-import { LinearGradient } from "expo-linear-gradient";
 import {
   View,
   Text,
   StyleSheet,
   Image,
   FlatList,
-  Alert,
   ActivityIndicator,
 } from "react-native";
-import { globalContext } from "../context/GlobalContext";
 import { SetStateAction, useContext, useEffect, useState } from "react";
-import ForecastCardInfo from "../components/ForecastCardInfo";
-import Header from "../components/Header";
-import Icon_btn from "../components/IconBtn";
-import EstimatedDayForecast from "../components/EstimatedDayForecast";
-import EstimatedDayTemp from "../components/EstimatedDayTemp";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackPramList } from "../@types/stack-navigation";
+import { globalContext } from "../../context/GlobalContext";
 import { useNavigation } from "@react-navigation/native";
+import { RootStackPramList } from "../../@types/stack-navigation";
+import { Header } from "../../components/Header";
+import { EstimatedDayForecast } from "../../components/EstimatedDayForecast";
+import { EstimatedDayTemp } from "../../components/EstimatedDayTemp";
+import { IconBtn } from "../../components/IconBtn";
+import { ForecastCardInfo } from "../../components/ForecastCardInfo";
+import { styles } from "./style";
 
-export default function HomeView() {
+const HomeView = () => {
   const Context = useContext(globalContext);
 
   const navi = useNavigation<NativeStackNavigationProp<RootStackPramList>>();
 
   useEffect(() => {
-    Context.fetchCityLatLon();
+    Context.fetchCity(false);
   }, [Context.permissions]);
 
   setTimeout(() => {
@@ -42,7 +41,7 @@ export default function HomeView() {
           <Text style={{ fontWeight: "bold", color: "rgb(33, 97, 140)" }}>
             Today
           </Text>
-          <Icon_btn
+          <IconBtn
             func={() => navi.navigate("FavoriteCity")}
             text="5 day weather forecast"
             name="chevron-forward-outline"
@@ -60,25 +59,5 @@ export default function HomeView() {
       </View>
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    height: "45%",
-    display: "flex",
-    alignItems: "center",
-    gap: 10,
-  },
-  ContainerForecastStyle: {
-    width: "100%",
-    height: 170,
-    padding: 15,
-  },
-  DaysForecastHeader: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-});
+};
+export { HomeView };

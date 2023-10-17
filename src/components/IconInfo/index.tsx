@@ -1,21 +1,17 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { globalContext } from "../context/GlobalContext";
+import { globalContext } from "../../context/GlobalContext";
+import { styles } from "./style";
 
 interface PropsType {
   name: "thermometer" | "water" | "md-cloud";
   text: string;
   data: number | string;
   defaultData: string;
-};
+}
 
-export default function IconInfo({
-  name,
-  text,
-  defaultData,
-  data,
-}: PropsType) {
+const IconInfo = ({ name, text, defaultData, data }: PropsType) => {
   const Context = useContext(globalContext);
 
   return (
@@ -31,22 +27,6 @@ export default function IconInfo({
       <Text style={styles.TextStyle}>{text}</Text>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  IconInfoContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  TextStyle: {
-    color: "rgba(69,121,241,.4)",
-    fontWeight: "bold",
-    fontSize: 15,
-  },
-  DataStyle: {
-    color: "rgb(33, 97, 140)",
-    fontWeight: "bold",
-    fontSize: 15,
-  },
-});
+export { IconInfo };
