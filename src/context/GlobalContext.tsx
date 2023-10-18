@@ -17,7 +17,6 @@ interface ContextProviderProps {
 
 interface ContextType {
   fetchCity: (fetchMethod: boolean) => void;
-  forecastCity: Forecast | undefined;
   forecastCards: Array<CardForecast> | undefined;
   FetchForecastCity: (lat: number, lon: number) => void;
   city?: City;
@@ -35,7 +34,6 @@ export const ContexProvider = ({ children }: ContextProviderProps) => {
   const [permissions, setPermissions] = useState("");
   const [loading, setLoading] = useState<boolean>(true);
   const [city, setCity] = useState<City>();
-  const [forecastCity, setForecastCity] = useState<Forecast>();
   const [forecastCards, setForecastCards] = useState<Array<CardForecast>>();
 
   const fetchCity = async (fetchMethod: boolean) => {
@@ -98,7 +96,6 @@ export const ContexProvider = ({ children }: ContextProviderProps) => {
         city,
         permissions,
         loading,
-        forecastCity,
         forecastCards,
         setLoading,
         setSearchCity,
