@@ -52,8 +52,8 @@ const HomeView = () => {
         ) : (
           <FlatList
             horizontal={true}
-            data={Context.forecastCity?.list}
-            renderItem={(item) => <ForecastCardInfo data={item} />}
+            data={Context.forecastCards}
+            renderItem={(item) => <ForecastCardInfo  data={item} />}
           />
         )}
       </View>

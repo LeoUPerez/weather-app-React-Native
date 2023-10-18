@@ -1,26 +1,14 @@
-import {
-  ListRenderItemInfo,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-} from "react-native";
+import { ListRenderItemInfo, Text, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useEffect, useState } from "react";
-import { List } from "../../models/ForecastModel";
 import { styles } from "./style";
+import { CardForecast } from "../../models/CardForecastModel";
 
 interface PropsType {
-  data: ListRenderItemInfo<List>;
+  data: ListRenderItemInfo<CardForecast>;
 }
 
 const ForecastCardInfo = ({ data }: PropsType) => {
-  const [imageUrl, setImageUrl] = useState<string>("");
-
-  useEffect(() => {
-    // setImageUrl(data.item.weather[0].main);
-    //    setImageUrl(WeatherImage(data.item.weather[0].main));
-  }, []);
+  const { weather } = data.item;
 
   return (
     <LinearGradient
@@ -29,21 +17,23 @@ const ForecastCardInfo = ({ data }: PropsType) => {
       end={{ x: 2.8, y: 0 }}
       start={{ x: 2, y: 1 }}
     >
-      <Text style={{ color: "white", fontWeight: "bold" }}>
-        {data.item.dt_txt.split(" ")[1]}
+      <Text style={{ color: "white", fontWeight: "bold", fontSize: 10 }}>
+        {data.item.hour}
       </Text>
+
       <Image
         style={styles.Image}
         source={
-          data.item.weather[0].main === "Clouds"
+          weather == "Clouds"
             ? require("../../assets/images/clouds.png")
-            : data.item.weather[0].main === "Rain"
+            : data.item.weather == "Rain"
             ? require("../../assets/images/rain.png")
             : require("../../assets/images/clear.png")
         }
       />
+      {/* <Text>{data.item.weather}</Text> */}
       <Text style={{ color: "white", fontWeight: "bold" }}>
-        {data.item.main.temp}
+        {data.item.temp}
       </Text>
     </LinearGradient>
   );
