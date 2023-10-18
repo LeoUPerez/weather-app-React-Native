@@ -33,7 +33,7 @@ const ForecastCardInfo = ({ data }: PropsType) => {
       />
       {/* <Text>{data.item.weather}</Text> */}
       <Text style={{ color: "white", fontWeight: "bold" }}>
-        {data.item.temp}
+        {data.item.temp} C°
       </Text>
     </LinearGradient>
   );
