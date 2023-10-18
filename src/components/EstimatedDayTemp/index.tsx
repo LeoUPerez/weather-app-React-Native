@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text } from "react-native";
 import { globalContext } from "../../context/GlobalContext";
 import { styles } from "./style";
 
-const EstimatedDayTemp =  () => {
+export default function EstimatedDayTemp() {
   const Context = useContext(globalContext);
 
   function name() {
@@ -30,6 +30,4 @@ const EstimatedDayTemp =  () => {
       />
     </LinearGradient>
   );
-};
-
-export { EstimatedDayTemp };
+}

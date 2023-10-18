@@ -8,17 +8,17 @@ interface PropsType {
   name: "thermometer" | "water" | "md-cloud";
   text: string;
   data: number | string;
-  defaultData: string;
+  defaultData?: string;
 }
 
-const IconInfo = ({ name, text, defaultData, data }: PropsType) => {
+export default function IconInfo ({ name, text, defaultData, data }: PropsType) {
   const Context = useContext(globalContext);
 
   return (
     <View style={styles.IconInfoContainer}>
       <Ionicons name={name} size={30} color={"rgb(33, 97, 140)"} />
       <Text style={styles.DataStyle}>
-        {data != undefined ? data : defaultData}
+        {data != undefined ? data : defaultData || 0}
         <Text>
           {text == "Wind speed" ? " km/h" : text != "Temp. max" ? "%" : "°"}
         </Text>
@@ -29,4 +29,3 @@ const IconInfo = ({ name, text, defaultData, data }: PropsType) => {
   );
 };
 
-export { IconInfo };

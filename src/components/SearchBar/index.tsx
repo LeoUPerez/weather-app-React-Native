@@ -4,7 +4,7 @@ import * as Device from "expo-device";
 import { globalContext } from "../../context/GlobalContext";
 import { styles } from "./style";
 
-const SearchBar = () => {
+export default function SearchBar() {
   const Context = useContext(globalContext);
 
   return (
@@ -14,6 +14,4 @@ const SearchBar = () => {
       placeholder="Hola"
     />
   );
-};
-
-export { SearchBar };
+}

@@ -11,14 +11,14 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { globalContext } from "../../context/GlobalContext";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackPramList } from "../../@types/stack-navigation";
-import { Header } from "../../components/Header";
-import { EstimatedDayForecast } from "../../components/EstimatedDayForecast";
-import { EstimatedDayTemp } from "../../components/EstimatedDayTemp";
-import { IconBtn } from "../../components/IconBtn";
-import { ForecastCardInfo } from "../../components/ForecastCardInfo";
+import Header from "../../components/Header";
+import EstimatedDayForecast from "../../components/EstimatedDayForecast";
+import EstimatedDayTemp from "../../components/EstimatedDayTemp";
+import IconBtn from "../../components/IconBtn";
+import ForecastCardInfo from "../../components/ForecastCardInfo";
 import { styles } from "./style";
 
-const HomeView = () => {
+export default function HomeView() {
   const Context = useContext(globalContext);
 
   const navi = useNavigation<NativeStackNavigationProp<RootStackPramList>>();
@@ -53,11 +53,10 @@ const HomeView = () => {
           <FlatList
             horizontal={true}
             data={Context.forecastCards}
-            renderItem={(item) => <ForecastCardInfo  data={item} />}
+            renderItem={(item) => <ForecastCardInfo data={item} />}
           />
         )}
       </View>
     </View>
   );
-};
-export { HomeView };
+}

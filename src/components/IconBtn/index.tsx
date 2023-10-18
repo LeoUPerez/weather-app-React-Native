@@ -11,13 +11,11 @@ interface PropsType {
   func: () => void;
 }
 
-const IconBtn = ({ text, name, func }: PropsType) => {
+export default function IconBtn({ text, name, func }: PropsType) {
   return (
     <TouchableOpacity style={styles.ContainerBtn} onPress={() => func()}>
       <Text style={styles.TextStyle}>{text}</Text>
       <Ionicons name={name} style={styles.IconButton}></Ionicons>
     </TouchableOpacity>
   );
-};
-
-export { IconBtn };
+}

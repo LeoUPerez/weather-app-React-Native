@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-const CitiesFavView = () => {
+export default function CitiesFavView() {
   return (
     <View
       style={{
@@ -12,5 +12,4 @@ const CitiesFavView = () => {
       <Text>CIties Fav View</Text>
     </View>
   );
-};
-export { CitiesFavView };
+}

@@ -7,7 +7,7 @@ interface PropsType {
   data: ListRenderItemInfo<CardForecast>;
 }
 
-const ForecastCardInfo = ({ data }: PropsType) => {
+export default function ForecastCardInfo({ data }: PropsType) {
   const { weather } = data.item;
 
   return (
@@ -37,6 +37,4 @@ const ForecastCardInfo = ({ data }: PropsType) => {
       </Text>
     </LinearGradient>
   );
-};
-
-export { ForecastCardInfo };
+}
