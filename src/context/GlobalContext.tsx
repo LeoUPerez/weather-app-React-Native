@@ -78,10 +78,10 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
             ok.list.map((item) => {
                 const date = new Date(item.dt_txt);
                 list.push({
-                    hour: date.toLocaleTimeString("en-US"),
-                    date: item.dt_txt.toString().split(' ')[0],
+                    hour: date.toLocaleTimeString("en-US", {hour: "2-digit", minute: "2-digit"}),
+                    date: date.toLocaleDateString('en-us', {year: "numeric", month: "short", day: "numeric"}),
                     weather: item.weather[0].main,
-                    temp: item.main.temp.toString(),
+                    temp: Math.trunc(item.main.temp),
                 });
             });
 
