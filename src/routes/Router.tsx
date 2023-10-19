@@ -1,7 +1,5 @@
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import { RootStackPramList } from "../@types/stack-navigation";
