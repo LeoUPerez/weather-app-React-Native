@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <View style={styles.Header}>
       <SearchBar />
-      <IconBtn func={() => console.log(Context.city)} name="search" text="" />
+      <IconBtn func={() => Context.fetchCity(true)} name="search" text="" />
     </View>
   );
 }
