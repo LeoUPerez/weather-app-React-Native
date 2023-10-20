@@ -74,8 +74,8 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
         fetch(
             `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_ID}&units=metric`
         ).then(async (response) => {
-            const ok: Forecast = await response.json();
-            ok.list.map((item) => {
+            const ApiResponse: Forecast = await response.json();
+            ApiResponse.list.map((item) => {
                 const date = new Date(item.dt_txt);
                 list.push({
                     hour: date.toLocaleTimeString("en-US", {hour: "2-digit", minute: "2-digit"}),

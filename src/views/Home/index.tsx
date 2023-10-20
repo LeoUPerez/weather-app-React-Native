@@ -24,6 +24,7 @@ export default function HomeView() {
 
     useEffect(() => {
         Context.fetchCity(false);
+
     }, [Context.permissions]);
 
     setTimeout(() => {
