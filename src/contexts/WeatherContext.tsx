@@ -26,7 +26,7 @@ interface ContextType {
     setSearchCity: Dispatch<SetStateAction<string>>;
 }
 
-export const globalContext = createContext<ContextType>({} as any);
+export const weatherContext = createContext<ContextType>({} as any);
 
 export const ContextProvider = ({children}: ContextProviderProps) => {
     const [searchCity, setSearchCity] = useState("");
@@ -54,9 +54,6 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
                     const city: City = await response.json();
                     setCity(city);
                     FetchForecastCity(city.coord.lat, city.coord.lon);
-                    setTimeout(() => {
-                        setLoading(false);
-                    }, 1500);
                 } else {
                     Alert.alert("Weather App Alert", "City not found");
                 }
@@ -65,6 +62,9 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
                 console.log(err);
             });
 
+        setTimeout(() => {
+            setLoading(false);
+        }, 3000);
     };
 
     function FetchForecastCity(lat: number, lon: number) {
@@ -90,7 +90,7 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
     }
 
     return (
-        <globalContext.Provider
+        <weatherContext.Provider
             value={{
                 fetchCity,
                 FetchForecastCity,
@@ -104,6 +104,6 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
             }}
         >
             {children}
-        </globalContext.Provider>
+        </weatherContext.Provider>
     );
 };

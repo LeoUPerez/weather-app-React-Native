@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { globalContext } from "../../context/GlobalContext";
+import { weatherContext } from "../../contexts/WeatherContext";
 import { styles } from "./style";
 
 interface PropsType {

@@ -6,7 +6,7 @@ import {
 } from "react-native";
 import {useContext, useEffect} from "react";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
-import {globalContext} from "../../context/GlobalContext";
+import {weatherContext} from "../../contexts/WeatherContext";
 import {useNavigation} from "@react-navigation/native";
 import {RootStackPramList} from "../../@types/stack-navigation";
 import Header from "../../components/Header";
@@ -15,21 +15,22 @@ import EstimatedDayTemp from "../../components/EstimatedDayTemp";
 import IconBtn from "../../components/IconBtn";
 import ForecastCardInfo from "../../components/ForecastCardInfo";
 import {styles} from "./style";
+import * as LocalAuthentication from 'expo-local-authentication'
 
 export default function HomeView() {
-    const Context = useContext(globalContext);
+    const Context = useContext(weatherContext);
 
     const navi = useNavigation<NativeStackNavigationProp<RootStackPramList>>();
 
 
     useEffect(() => {
-        Context.fetchCity(false);
+        LocalAuthentication.authenticateAsync().then(({success}) => {
+            if (success) {
+                Context.fetchCity(false);
+            }
+        })
 
-    }, [Context.permissions]);
-
-    setTimeout(() => {
-        Context.setLoading(false);
-    }, 3000);
+    }, []);
 
     return (
         <View style={styles.container}>

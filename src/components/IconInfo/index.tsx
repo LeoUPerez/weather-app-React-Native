@@ -1,7 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { globalContext } from "../../context/GlobalContext";
+import { weatherContext } from "../../contexts/WeatherContext";
 import { styles } from "./style";
 
 interface PropsType {
@@ -12,7 +12,7 @@ interface PropsType {
 }
 
 export default function IconInfo ({ name, text, defaultData, data }: PropsType) {
-  const Context = useContext(globalContext);
+  const Context = useContext(weatherContext);
 
   return (
     <View style={styles.IconInfoContainer}>

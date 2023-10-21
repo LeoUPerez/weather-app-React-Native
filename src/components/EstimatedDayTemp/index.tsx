@@ -1,11 +1,11 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useContext, useRef } from "react";
 import { Image, StyleSheet, Text } from "react-native";
-import { globalContext } from "../../context/GlobalContext";
+import { weatherContext } from "../../contexts/WeatherContext";
 import { styles } from "./style";
 
 export default function EstimatedDayTemp() {
-  const Context = useContext(globalContext);
+  const Context = useContext(weatherContext);
 
   function name() {
     console.log("JUAn");

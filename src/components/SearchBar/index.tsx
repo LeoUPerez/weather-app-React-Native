@@ -1,11 +1,11 @@
 import { useEffect, useContext, useRef } from "react";
 import { TextInput, StyleSheet } from "react-native";
 import * as Device from "expo-device";
-import { globalContext } from "../../context/GlobalContext";
+import { weatherContext } from "../../contexts/WeatherContext";
 import { styles } from "./style";
 
 export default function SearchBar() {
-  const Context = useContext(globalContext);
+  const Context = useContext(weatherContext);
 
   return (
     <TextInput
