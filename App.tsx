@@ -5,7 +5,7 @@ import {} from '@supabase/supabase-js'
 
 const windowHeight = Dimensions.get("window").height;
 
-function App() {
+export default function App() {
     return (
         <ScrollView>
             <View style={styles.container_style}>
