@@ -1,6 +1,6 @@
 import {Dimensions, ScrollView, StyleSheet, View} from "react-native";
 import RouterNavigator from "./src/routes/Router";
-import {ContextProvider} from "./src/context/GlobalContext";
+import {ContextProvider} from "./src/contexts/WeatherContext";
 import {} from '@supabase/supabase-js'
 
 const windowHeight = Dimensions.get("window").height;
