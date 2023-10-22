@@ -2,9 +2,9 @@ import {
     View,
     Text,
     FlatList,
-    ActivityIndicator,
+    ActivityIndicator, Image, Button,
 } from "react-native";
-import {useContext, useEffect} from "react";
+import {SetStateAction, useContext, useEffect, useState} from "react";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {weatherContext} from "../../contexts/WeatherContext";
 import {useNavigation} from "@react-navigation/native";
@@ -15,6 +15,7 @@ import EstimatedDayTemp from "../../components/EstimatedDayTemp";
 import IconBtn from "../../components/IconBtn";
 import ForecastCardInfo from "../../components/ForecastCardInfo";
 import {styles} from "./style";
+import * as ImagePicker from 'expo-image-picker';
 import * as LocalAuthentication from 'expo-local-authentication'
 
 export default function HomeView() {
@@ -22,15 +23,14 @@ export default function HomeView() {
 
     const navi = useNavigation<NativeStackNavigationProp<RootStackPramList>>();
 
-
     useEffect(() => {
         LocalAuthentication.authenticateAsync().then(({success}) => {
             if (success) {
                 Context.fetchCity(false);
             }
         })
-
     }, []);
+
 
     return (
         <View style={styles.container}>
