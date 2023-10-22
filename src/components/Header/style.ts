@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
-  Header: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  });
+    Header: {
+        height: 60,
+        display: "flex",
+        flexDirection: "row",
+        gap: 1,
+    },
+});
