@@ -17,6 +17,8 @@ import ForecastCardInfo from "../../components/ForecastCardInfo";
 import {styles} from "./style";
 import * as ImagePicker from 'expo-image-picker';
 import * as LocalAuthentication from 'expo-local-authentication'
+import ExpoCam from "../../components/ExpoCam";
+import {expoCamContext, ExpoCamContextProvider} from "../../contexts/ExpoCamContext";
 
 export default function HomeView() {
     const Context = useContext(weatherContext);
@@ -31,10 +33,12 @@ export default function HomeView() {
         })
     }, []);
 
-
     return (
         <View style={styles.container}>
-            <Header/>
+            <ExpoCamContextProvider>
+                <ExpoCam/>
+                <Header/>
+            </ExpoCamContextProvider>
             {/**/}
             <Text>{Context.city?.name}</Text>
             {/**/}
