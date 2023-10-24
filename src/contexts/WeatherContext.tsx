@@ -64,13 +64,12 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
 
         setTimeout(() => {
             setLoading(false);
-        }, 3000);
+        }, 2000);
     };
 
     function FetchForecastCity(lat: number, lon: number) {
         let list: any = [];
 
-        const API_ID = "8926fd8755940c0fb62183daa7f7ebe6";
         fetch(
             `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_ID}&units=metric`
         ).then(async (response) => {
