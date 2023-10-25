@@ -2,12 +2,16 @@ import {ListRenderItemInfo, Text, Image} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import {styles} from "./style";
 import {CardForecast} from "../../models/CardForecastModel";
+import {useContext} from "react";
+import {weatherContext} from "../../contexts/WeatherContext";
 
 interface PropsType {
     data: ListRenderItemInfo<CardForecast>;
 }
 
+
 export default function ForecastCardInfo({data}: PropsType) {
+    const Context = useContext(weatherContext);
     const {weather} = data.item;
 
     return (
@@ -26,19 +30,7 @@ export default function ForecastCardInfo({data}: PropsType) {
 
             <Image
                 style={styles.Image}
-                source={
-                    weather == "Clear" ?
-                        require("../../assets/images/clouds.png")
-                        : data.item.weather == "Clouds"
-                            ? require("../../assets/images/clouds.png")
-                            : data.item.weather == "Drizzle"
-                                ? require("../../assets/images/drizzle.png")
-                                : data.item.weather == "Mist"
-                                    ? require("../../assets/images/mist.png")
-                                    : data.item.weather == "Rain"
-                                        ? require("../../assets/images/rain.png")
-                                        : require("../../assets/images/snow.png")
-                }
+                source={autoSelectImg(weather)}
             />
             {/* <Text>{data.item.weather}</Text> */}
             <Text style={{color: "white", fontWeight: "bold"}}>
@@ -46,4 +38,20 @@ export default function ForecastCardInfo({data}: PropsType) {
             </Text>
         </LinearGradient>
     );
+    function autoSelectImg(weather: string) {
+        switch (weather) {
+            case "Clear":
+                return require("../../assets/images/clear.png");
+            case "Clouds":
+                return require("../../assets/images/clouds.png");
+            case "Drizzle":
+                return require("../../assets/images/drizzle.png");
+            case "Mist":
+                return require("../../assets/images/mist.png");
+            case "Rain":
+                return require("../../assets/images/rain.png");
+            case "Snow":
+                return require("../../assets/images/snow.png");
+        }
+    }
 }
