@@ -1,17 +1,16 @@
-import { useEffect, useContext, useRef } from "react";
-import { TextInput, StyleSheet } from "react-native";
-import * as Device from "expo-device";
-import { weatherContext } from "../../contexts/WeatherContext";
-import { styles } from "./style";
+import {useContext} from "react";
+import {TextInput} from "react-native";
+import {weatherContext} from "../../contexts/WeatherContext";
+import {styles} from "./style";
 
 export default function SearchBar() {
-  const Context = useContext(weatherContext);
+    const Context = useContext(weatherContext);
 
-  return (
-    <TextInput
-      onChangeText={(value) => Context.setSearchCity(value.trim())}
-      style={styles.Input}
-      placeholder="Hola"
-    />
-  );
+    return (
+        <TextInput
+            onChangeText={(value) => Context.setSearchCity(value.trim())}
+            style={styles.Input}
+            placeholder="Search City"
+        />
+    );
 }

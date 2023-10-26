@@ -1,6 +1,5 @@
-import {createContext, Dispatch, SetStateAction, useContext, useRef, useState} from "react";
+import {createContext, Dispatch, SetStateAction, useRef, useState} from "react";
 import * as ImagePicker from "expo-image-picker";
-import {weatherContext} from "./WeatherContext";
 import {Camera} from "expo-camera";
 import {Alert} from "react-native";
 

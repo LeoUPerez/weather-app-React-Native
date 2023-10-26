@@ -2,9 +2,9 @@ import {
     View,
     Text,
     FlatList,
-    ActivityIndicator, Image, Button,
+    ActivityIndicator,
 } from "react-native";
-import {SetStateAction, useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {weatherContext} from "../../contexts/WeatherContext";
 import {useNavigation} from "@react-navigation/native";
@@ -15,10 +15,9 @@ import EstimatedDayTemp from "../../components/EstimatedDayTemp";
 import IconBtn from "../../components/IconBtn";
 import ForecastCardInfo from "../../components/ForecastCardInfo";
 import {styles} from "./style";
-import * as ImagePicker from 'expo-image-picker';
 import * as LocalAuthentication from 'expo-local-authentication'
 import ExpoCam from "../../components/ExpoCam";
-import {expoCamContext, ExpoCamContextProvider} from "../../contexts/ExpoCamContext";
+import {ExpoCamContextProvider} from "../../contexts/ExpoCamContext";
 
 export default function HomeView() {
     const Context = useContext(weatherContext);
