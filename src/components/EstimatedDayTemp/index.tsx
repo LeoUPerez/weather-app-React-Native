@@ -1,6 +1,6 @@
 import {LinearGradient} from "expo-linear-gradient";
-import {useContext, useRef} from "react";
-import {Image, StyleSheet, Text} from "react-native";
+import {useContext} from "react";
+import {Image, Text} from "react-native";
 import {weatherContext} from "../../contexts/WeatherContext";
 import {styles} from "./style";
 
