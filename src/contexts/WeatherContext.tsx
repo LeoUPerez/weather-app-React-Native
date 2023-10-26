@@ -41,11 +41,10 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
             setPermissions("change");
         }
         let location = await Location.getCurrentPositionAsync({});
-        const API_ID = "8926fd8755940c0fb62183daa7f7ebe6";
 
         const url = fetchMethod
-            ? `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${API_ID}&units=metric`
-            : `https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${API_ID}&units=metric`;
+            ? `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${process.env.API_ID}&units=metric`
+            : `https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${process.env.API_ID}&units=metric`;
 
         fetch(url)
             .then(async (response) => {
@@ -69,9 +68,8 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
 
     function FetchForecastCity(lat: number, lon: number) {
         let list: any = [];
-
         fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_ID}&units=metric`
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.API_ID}&units=metric`
         ).then(async (response) => {
             const ApiResponse: Forecast = await response.json();
             ApiResponse.list.map((item) => {
