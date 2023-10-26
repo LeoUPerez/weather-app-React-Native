@@ -1,4 +1,4 @@
-import {View, StyleSheet} from "react-native";
+import {View} from "react-native";
 import {useContext} from "react";
 import {weatherContext} from "../../contexts/WeatherContext";
 import {styles} from "./style";
