@@ -38,6 +38,7 @@ export default function ForecastCardInfo({data}: PropsType) {
             </Text>
         </LinearGradient>
     );
+
     function autoSelectImg(weather: string) {
         switch (weather) {
             case "Clear":
