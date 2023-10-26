@@ -1,7 +1,5 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {useContext} from "react";
-import {StyleSheet, Text, View} from "react-native";
-import {weatherContext} from "../../contexts/WeatherContext";
+import {Text, View} from "react-native";
 import {styles} from "./style";
 
 interface PropsType {
