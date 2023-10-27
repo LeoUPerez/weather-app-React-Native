@@ -4,7 +4,7 @@ import {
     FlatList,
     ActivityIndicator,
 } from "react-native";
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {weatherContext} from "../../contexts/WeatherContext";
 import {useNavigation} from "@react-navigation/native";
@@ -18,17 +18,24 @@ import {styles} from "./style";
 import * as LocalAuthentication from 'expo-local-authentication'
 import ExpoCam from "../../components/ExpoCam";
 import {ExpoCamContextProvider} from "../../contexts/ExpoCamContext";
+import * as Location from "expo-location";
+import {City} from "../../models/CityModel";
 
 export default function HomeView() {
     const Context = useContext(weatherContext);
 
     const navi = useNavigation<NativeStackNavigationProp<RootStackPramList>>();
+    const [city, setCity] = useState<City>();
 
     useEffect(() => {
-        LocalAuthentication.authenticateAsync().then(({success}) => {
-            if (success) {
-                Context.fetchCity(false);
-            }
+        LocalAuthentication.authenticateAsync().then(async ({success}) => {
+                await Location.requestForegroundPermissionsAsync();
+                let location = await Location.getCurrentPositionAsync({});
+                fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${process.env.API_ID}&units=metric`)
+                    .then( async (response) => {
+                        setCity(await response.json());
+                    })
+                // Context.fetchCity(false);
         })
     }, []);
 
@@ -39,7 +46,7 @@ export default function HomeView() {
                 <Header/>
             </ExpoCamContextProvider>
             {/**/}
-            <Text>{Context.city?.name}</Text>
+            <Text>{city?.name}</Text>
             {/**/}
             <EstimatedDayTemp/>
             <EstimatedDayForecast/>

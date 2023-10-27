@@ -1,11 +1,16 @@
 import {LinearGradient} from "expo-linear-gradient";
 import {useContext} from "react";
-import {Image, Text} from "react-native";
+import {Text} from "react-native";
 import {weatherContext} from "../../contexts/WeatherContext";
 import {styles} from "./style";
+import * as Images from "../Images";
 
 export default function EstimatedDayTemp() {
     const Context = useContext(weatherContext);
+    const key = `Image${Context?.city?.weather[0].main}`;
+    const CustomImage = Images.hasOwnProperty(key) ? (Images as any)[key] : null;
+
+    console.log("EstimatedDayTemp")
 
     return (
         <LinearGradient
@@ -19,27 +24,7 @@ export default function EstimatedDayTemp() {
                     ? Context?.city?.main.temp.toString().split(".")[0]
                     : 0 + "°"}
             </Text>
-            <Image
-                style={styles.Image}
-                source={autoSelectImg(Context?.city!?.weather[0].main)}
-            />
+            {CustomImage && <CustomImage style={styles.Image}/>}
         </LinearGradient>
     );
-
-    function autoSelectImg(weather: string) {
-        switch (weather) {
-            case "Clear":
-                return require("../../assets/images/clear.png");
-            case "Clouds":
-                return require("../../assets/images/clouds.png");
-            case "Drizzle":
-                return require("../../assets/images/drizzle.png");
-            case "Mist":
-                return require("../../assets/images/mist.png");
-            case "Rain":
-                return require("../../assets/images/rain.png");
-            case "Snow":
-                return require("../../assets/images/snow.png");
-        }
-    }
 }
