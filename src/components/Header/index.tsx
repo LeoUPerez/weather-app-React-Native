@@ -13,7 +13,6 @@ export default function Header() {
         <View style={styles.Header}>
             <Avatar/>
             <SearchBar/>
-            <IconBtn func={() => Context.fetchCity(true)} name="search" text=""/>
         </View>
     );
 }

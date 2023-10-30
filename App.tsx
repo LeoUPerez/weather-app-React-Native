@@ -1,6 +1,6 @@
 import {Dimensions, ScrollView, StyleSheet, View} from "react-native";
 import RouterNavigator from "./src/routes/Router";
-import {ContextProvider} from "./src/contexts/WeatherContext";
+// import {ContextProvider} from "./src/contexts/WeatherContext";
 import {} from '@supabase/supabase-js'
 
 const windowHeight = Dimensions.get("window").height;
@@ -9,9 +9,9 @@ export default function App() {
     return (
         <ScrollView>
             <View style={styles.container_style}>
-                <ContextProvider>
+                {/*<ContextProvider>*/}
                     <RouterNavigator/>
-                </ContextProvider>
+                {/*</ContextProvider>*/}
             </View>
         </ScrollView>
     );

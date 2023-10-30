@@ -1,11 +1,24 @@
 import {LinearGradient} from "expo-linear-gradient";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {Text} from "react-native";
 import {weatherContext} from "../../contexts/WeatherContext";
 import {styles} from "./style";
 import * as Images from "../Images";
+import * as Location from "expo-location";
 
 export default function EstimatedDayTemp() {
+
+    useEffect(() => {
+        (async () => {
+            await Location.requestForegroundPermissionsAsync();
+            let location = await Location.getCurrentPositionAsync({});
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${process.env.API_ID}&units=metric`)
+                .then(async (response) => {
+                    Context.setCity(await response.json());
+                })
+        })();
+    }, []);
+
     const Context = useContext(weatherContext);
     const key = `Image${Context?.city?.weather[0].main}`;
     const CustomImage = Images.hasOwnProperty(key) ? (Images as any)[key] : null;
@@ -19,6 +32,7 @@ export default function EstimatedDayTemp() {
             start={{x: 0, y: 1}}
             style={styles.GradientBox}
         >
+            <Text>{Context.city?.name}</Text>
             <Text style={styles.TempTextStyle}>
                 {Context?.city != undefined
                     ? Context?.city?.main.temp.toString().split(".")[0]

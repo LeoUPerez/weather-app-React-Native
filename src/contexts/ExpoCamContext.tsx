@@ -2,6 +2,7 @@ import {createContext, Dispatch, SetStateAction, useRef, useState} from "react";
 import * as ImagePicker from "expo-image-picker";
 import {Camera} from "expo-camera";
 import {Alert} from "react-native";
+import {ContextProviderProps} from "../@types/context-provider-props";
 
 interface ContextType {
     searchPicGallery: () => void;
@@ -17,7 +18,7 @@ interface ContextType {
 
 export const expoCamContext = createContext<ContextType>({} as any);
 
-export const ExpoCamContextProvider = ({children}: any) => {
+export const ExpoCamContextProvider = ({children}: ContextProviderProps) => {
     const [stateCamera, setStateCamera] = useState(false);
     const [image, setImage] = useState<SetStateAction<any>>("");
     const camera: any = useRef();

@@ -9,10 +9,7 @@ import {Alert} from "react-native";
 import {Forecast} from "../models/ForecastModel";
 import {CardForecast} from "../models/CardForecastModel";
 import * as Location from "expo-location";
-
-interface ContextProviderProps {
-    children: React.ReactNode;
-}
+import {ContextProviderProps} from "../@types/context-provider-props";
 
 interface ContextType {
     fetchCity: (fetchMethod: boolean) => void;
@@ -21,15 +18,13 @@ interface ContextType {
     city?: City;
     loading: boolean;
     permissions: string;
-    searchCity: string;
     setLoading: Dispatch<SetStateAction<boolean>>;
     setCity: Dispatch<SetStateAction<City | undefined>>;
-    setSearchCity: Dispatch<SetStateAction<string>>;
 }
 
 export const weatherContext = createContext<ContextType>({} as any);
 
-export const ContextProvider = ({children}: ContextProviderProps) => {
+export const WeatherContextProvider = ({children}: ContextProviderProps) => {
     const [searchCity, setSearchCity] = useState("");
     const [permissions, setPermissions] = useState("");
     const [loading, setLoading] = useState<boolean>(true);
@@ -92,14 +87,12 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
             value={{
                 fetchCity,
                 fetchForecastCity,
-                searchCity,
                 city,
                 permissions,
                 loading,
                 forecastCards,
                 setLoading,
                 setCity,
-                setSearchCity,
             }}
         >
             {children}
