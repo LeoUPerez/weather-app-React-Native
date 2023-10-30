@@ -3,7 +3,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import {styles} from "./style";
 
 interface PropsType {
-    text: string;
+    text?: string;
     name: "search" | "chevron-forward-outline";
     func: () => void;
 }

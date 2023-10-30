@@ -13,11 +13,9 @@ import {ContextProviderProps} from "../@types/context-provider-props";
 
 interface ContextType {
     fetchCity: (fetchMethod: boolean) => void;
-    forecastCards: Array<CardForecast> | undefined;
-    fetchForecastCity: (lat: number, lon: number) => void;
     city?: City;
     loading: boolean;
-    permissions: string;
+    // permissions: string;
     setLoading: Dispatch<SetStateAction<boolean>>;
     setCity: Dispatch<SetStateAction<City | undefined>>;
 }
@@ -25,11 +23,10 @@ interface ContextType {
 export const weatherContext = createContext<ContextType>({} as any);
 
 export const WeatherContextProvider = ({children}: ContextProviderProps) => {
-    const [searchCity, setSearchCity] = useState("");
-    const [permissions, setPermissions] = useState("");
+    // const [searchCity, setSearchCity] = useState("");
+    // const [permissions, setPermissions] = useState("");
     const [loading, setLoading] = useState<boolean>(true);
     const [city, setCity] = useState<City>();
-    const [forecastCards, setForecastCards] = useState<Array<CardForecast>>();
 
     async function fetchCity(fetchMethod: boolean) {
         // let {status} = await Location.requestForegroundPermissionsAsync();
@@ -62,35 +59,13 @@ export const WeatherContextProvider = ({children}: ContextProviderProps) => {
         // }, 2000);
     }
 
-    function fetchForecastCity(lat: number, lon: number) {
-        let list: any = [];
-        fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.API_ID}&units=metric`
-        ).then(async (response) => {
-            const ApiResponse: Forecast = await response.json();
-            ApiResponse.list.map((item) => {
-                const date = new Date(item.dt_txt);
-                list.push({
-                    hour: date.toLocaleTimeString("en-US", {hour: "2-digit", minute: "2-digit"}),
-                    date: date.toLocaleDateString('en-us', {year: "numeric", month: "short", day: "numeric"}),
-                    weather: item.weather[0].main,
-                    temp: Math.trunc(item.main.temp),
-                });
-            });
-
-            setForecastCards(list);
-        });
-    }
 
     return (
         <weatherContext.Provider
             value={{
                 fetchCity,
-                fetchForecastCity,
                 city,
-                permissions,
                 loading,
-                forecastCards,
                 setLoading,
                 setCity,
             }}

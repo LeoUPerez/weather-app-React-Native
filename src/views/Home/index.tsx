@@ -62,7 +62,7 @@ export default function HomeView() {
                     <FlatList
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
-                        data={Context.forecastCards}
+                        data={[]} //Context.forecastCards
                         renderItem={(item) => <ForecastCardInfo data={item}/>}
                     />
                 )}

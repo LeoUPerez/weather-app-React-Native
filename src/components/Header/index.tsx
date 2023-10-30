@@ -7,7 +7,6 @@ import SearchBar from "../SearchBar";
 import Avatar from "../Avatar";
 
 export default function Header() {
-    const Context = useContext(weatherContext);
 
     return (
         <View style={styles.Header}>

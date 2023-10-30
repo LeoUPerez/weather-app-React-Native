@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
   Input: {
-    width: "80%",
+    width: "88%",
     height: 40,
     marginTop: 12,
     borderWidth: 1,

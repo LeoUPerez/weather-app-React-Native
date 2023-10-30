@@ -10,12 +10,12 @@ export default function EstimatedDayTemp() {
 
     useEffect(() => {
         (async () => {
-            await Location.requestForegroundPermissionsAsync();
-            let location = await Location.getCurrentPositionAsync({});
-            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${process.env.API_ID}&units=metric`)
-                .then(async (response) => {
-                    Context.setCity(await response.json());
-                })
+            // await Location.requestForegroundPermissionsAsync();
+            // let location = await Location.getCurrentPositionAsync({});
+            // fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${process.env.API_ID}&units=metric`)
+            //     .then(async (response) => {
+            //         Context.setCity(await response.json());
+            //     })
         })();
     }, []);
 
