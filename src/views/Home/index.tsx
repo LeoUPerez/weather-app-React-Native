@@ -15,23 +15,35 @@ import EstimatedDayTemp from "../../components/EstimatedDayTemp";
 import IconBtn from "../../components/IconBtn";
 import ForecastCardInfo from "../../components/ForecastCardInfo";
 import {styles} from "./style";
-import * as LocalAuthentication from 'expo-local-authentication'
 import ExpoCam from "../../components/ExpoCam";
 import {ExpoCamContextProvider} from "../../contexts/ExpoCamContext";
 import * as Location from "expo-location";
 import {City} from "../../models/CityModel";
+import {useWeatherData} from "../../hooks/useWeatherData";
+import onAuthenticate from "../../auth/onAuthenticate";
+import useFetch from "../../hooks/useFetch";
+import {ForecastContextProvider} from "../../contexts/ForecastContext";
+import EstimatedFiveDayForecast from "../../components/EstimatedFiveDayForecast";
 
 export default function HomeView() {
     const Context = useContext(weatherContext);
+    const {getWeatherCity} = useFetch()
+
+    // useEffect(() => {
+    //     Location.getCurrentPositionAsync().then(({coords}) => {
+    //         const {latitude, longitude} = coords;
+    // console.log(latitude, longitude)
+    // console.log(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.API_ID}&units=metric`)
+    // getWeather(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.API_ID}&units=metric`)
+    // });
+    // }, []);
+
 
     const navi = useNavigation<NativeStackNavigationProp<RootStackPramList>>();
+// const auth = LocalAuthentication.authenticateAsync();
 
-    useEffect(() => {
-        LocalAuthentication.authenticateAsync().then(async ({success}) => {
 
-            // Context.fetchCity(false);
-        })
-    }, []);
+    console.log("HomeView")
 
     return (
         <View style={styles.container}>
@@ -50,22 +62,15 @@ export default function HomeView() {
                     <Text style={{fontWeight: "bold", color: "rgb(33, 97, 140)"}}>
                         Today
                     </Text>
-                    <IconBtn
-                        func={() => navi.navigate("FavoriteCity")}
-                        text="5 day weather forecast"
-                        name="chevron-forward-outline"
-                    />
+                    {/*<IconBtn*/}
+                    {/*    func={() => navi.navigate("FavoriteCity")}*/}
+                    {/*    text="5 day weather forecast"*/}
+                    {/*    name="chevron-forward-outline"*/}
+                    {/*/>*/}
                 </View>
-                {Context.loading ? (
-                    <ActivityIndicator size={50}/>
-                ) : (
-                    <FlatList
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                        data={[]} //Context.forecastCards
-                        renderItem={(item) => <ForecastCardInfo data={item}/>}
-                    />
-                )}
+                <ForecastContextProvider>
+                    <EstimatedFiveDayForecast />
+                </ForecastContextProvider>
             </View>
         </View>
     );
