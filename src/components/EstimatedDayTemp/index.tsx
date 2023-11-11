@@ -1,29 +1,25 @@
 import {LinearGradient} from "expo-linear-gradient";
-import {useContext, useEffect, useState} from "react";
-import {Alert, Text} from "react-native";
+import {useContext, useEffect} from "react";
+import {Text} from "react-native";
 import {weatherContext} from "../../contexts/WeatherContext";
 import {styles} from "./style";
 import * as Images from "../Images";
 import useFetch from "../../hooks/useFetch";
-import {City} from "../../models/CityModel";
-import * as Location from "expo-location";
+import getLocation from "../../utils/getLocation";
 
 export default function EstimatedDayTemp() {
     const Context = useContext(weatherContext);
     const {getWeatherCity} = useFetch()
 
-    // Location.requestForegroundPermissionsAsync();
-    // useFetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${process.env.API_ID}&units=metric`)
-
     useEffect(() => {
-        Location.getCurrentPositionAsync().then(async ({coords}) => {
-            const {latitude, longitude} = coords;
-            // getWeatherCity(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.API_ID}&units=metric`);
-        });
+        (async () => {
+            const coords = await getLocation();
+            await getWeatherCity(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${process.env.API_ID}&units=metric`);
+        })();
     }, []);
 
-    const key = `Image${Context?.city?.weather[0].main}`;
-    const CustomImage = Images.hasOwnProperty(key) ? (Images as any)[key] : null;
+    // const key = `Image${Context?.city?.weather[0].main}`;
+    // const CustomImage = Images.hasOwnProperty(key) ? (Images as any)[key] : null;
 
     console.log("EstimatedDayTemp")
 
@@ -37,10 +33,10 @@ export default function EstimatedDayTemp() {
             <Text>{Context.city?.name}</Text>
             <Text style={styles.TempTextStyle}>
                 {Context?.city != undefined
-                    ? Context?.city?.main.temp.toString().split(".")[0]
+                    ? Context?.city?.temp.toString().split(".")[0]
                     : 0}°
             </Text>
-            {CustomImage && <CustomImage style={styles.Image}/>}
+            {/*{CustomImage && <CustomImage style={styles.Image}/>}*/}
         </LinearGradient>
     );
 }

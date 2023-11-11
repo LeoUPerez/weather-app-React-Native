@@ -7,6 +7,8 @@ import {style} from "./style";
 export default function ExpoCam() {
     const Context = useContext(expoCamContext);
 
+    console.log("ExpoCam")
+
     return (
         <View style={Context.stateCamera ? style.cameraON : style.cameraOFF}>
             {Context.stateCamera &&

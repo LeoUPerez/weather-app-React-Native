@@ -1,34 +1,23 @@
 import {ActivityIndicator, FlatList, View} from "react-native";
 import ForecastCardInfo from "../ForecastCardInfo";
-import {useContext, useEffect} from "react";
-import {forecastContext} from "../../contexts/ForecastContext";
-import * as Location from "expo-location";
+import {useContext} from "react";
+import {weatherContext} from "../../contexts/WeatherContext";
 
 
 export default function EstimatedFiveDayForecast() {
-    const Context = useContext(forecastContext);
+    const Context = useContext(weatherContext);
 
     console.log("EstimatedFiveDayForecast")
 
-    useEffect(() => {
-        console.log("before EstimatedFiveDayForecast useEffect")
-        Location.getCurrentPositionAsync().then(({coords}) => {
-            // const {latitude, longitude} = coords;
-            // Context.fetchForecastCity(latitude, longitude);
-            console.log(coords)
-        });
-        console.log("after EstimatedFiveDayForecast useEffect")
-    }, []);
-
     return (
         <View>
-            {!Context.forecastCards ? (
+            {!Context.city?.estimateFiveDays ? (
                 <ActivityIndicator size={50}/>
             ) : (
                 <FlatList
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    data={Context.forecastCards}
+                    data={Context.city?.estimateFiveDays}
                     renderItem={(item) => <ForecastCardInfo data={item}/>}
                 />
             )}

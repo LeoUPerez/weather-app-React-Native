@@ -3,12 +3,14 @@ import RouterNavigator from "./src/routes/Router";
 // import {ContextProvider} from "./src/contexts/WeatherContext";
 import {} from '@supabase/supabase-js'
 import onAuthenticate from "./src/auth/onAuthenticate";
+import {useEffect, useState} from "react";
 
 const windowHeight = Dimensions.get("window").height;
 
 export default function App() {
 
- const authenticate = onAuthenticate()
+
+ // const authenticate = onAuthenticate()
 
     return (
         <ScrollView>

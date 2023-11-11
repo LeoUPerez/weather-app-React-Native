@@ -2,8 +2,6 @@ import {ListRenderItemInfo, Text, Image} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import {styles} from "./style";
 import {CardForecast} from "../../models/CardForecastModel";
-import {useContext} from "react";
-import {weatherContext} from "../../contexts/WeatherContext";
 
 interface PropsType {
     data: ListRenderItemInfo<CardForecast>;
@@ -11,7 +9,6 @@ interface PropsType {
 
 
 export default function ForecastCardInfo({data}: PropsType) {
-    const Context = useContext(weatherContext);
     const {weather} = data.item;
 
     return (
