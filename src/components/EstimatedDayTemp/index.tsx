@@ -13,8 +13,12 @@ export default function EstimatedDayTemp() {
 
     useEffect(() => {
         (async () => {
-            const coords = await getLocation();
-            await getWeatherCity(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${process.env.API_ID}&units=metric`);
+            try {
+                const coords = await getLocation();
+                await getWeatherCity(`https://api.openweathermap.org/data/2.5/weather?lat=${coords!.latitude}&lon=${coords!.longitude}&appid=${process.env.API_ID}&units=metric`);
+            } catch (e) {
+                console.log(e+" Error useeffect")
+            }
         })();
     }, []);
 

@@ -2,34 +2,39 @@ import {useContext} from "react";
 import {City} from "../models/CityModel";
 import {Forecast} from "../models/ForecastModel";
 import {weatherContext} from "../contexts/WeatherContext";
-import {Root} from "../models/ModelPrueba";
+import {CustomCity} from "../models/CustomCityModel";
 
 
 export default function useFetch() {
     const ContextWeather = useContext(weatherContext);
     const getWeatherCity = async (url: string) => {
-        const data = await fetch(url)
-            .then(async (res) => {
-                const ApiResponse: City = await res.json();
-                return {
-                    name: ApiResponse.name,
-                    temp: Math.trunc(ApiResponse.main.temp),
-                    temp_max: Math.trunc(ApiResponse.main.temp_max),
-                    humidity: ApiResponse.main.humidity,
-                    wind_speed: ApiResponse.wind.speed,
-                    weather: ApiResponse.weather[0].main,
-                    lat: ApiResponse.coord.lat,
-                    lon: ApiResponse.coord.lon,
-                }
-            })
+        ContextWeather.onLoading();
 
-        getForecastCity(data.lat, data.lon, data)
+        try {
+            const data = await fetch(url)
+                .then(async (res) => {
+                    const ApiResponse: City = await res.json();
+                    return {
+                        name: ApiResponse.name,
+                        temp: Math.trunc(ApiResponse.main.temp),
+                        temp_max: Math.trunc(ApiResponse.main.temp_max),
+                        humidity: ApiResponse.main.humidity,
+                        wind_speed: ApiResponse.wind.speed,
+                        weather: ApiResponse.weather[0].main,
+                        lat: ApiResponse.coord.lat,
+                        lon: ApiResponse.coord.lon,
+                    }
+                })
+            getForecastCity(data)
+        } catch (e) {
+            console.log(e + " Error useFetch")
+        }
     }
 
-    const getForecastCity = (lat: number, lon: number, weather: Root) => {
+    const getForecastCity = (weather: CustomCity) => {
         let list: any = [];
         fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.API_ID}&units=metric`
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${weather.lat}&lon=${weather.lon}&appid=${process.env.API_ID}&units=metric`
         ).then(async (response) => {
             const ApiResponse: Forecast = await response.json();
             ApiResponse.list.map((item) => {
@@ -49,8 +54,15 @@ export default function useFetch() {
                 humidity: weather.humidity,
                 wind_speed: weather.wind_speed,
                 estimateFiveDays: list,
+                lat: weather.lat,
+                lon: weather.lon,
+                loading: true,
             })
         });
+
+        setTimeout(() => {
+            ContextWeather.offLoading();
+        }, 1500);
     }
     return {getWeatherCity, getForecastCity}
 }

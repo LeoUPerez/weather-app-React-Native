@@ -1,6 +1,6 @@
 import {ActivityIndicator, FlatList, View} from "react-native";
 import ForecastCardInfo from "../ForecastCardInfo";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {weatherContext} from "../../contexts/WeatherContext";
 
 
@@ -11,7 +11,7 @@ export default function EstimatedFiveDayForecast() {
 
     return (
         <View>
-            {!Context.city?.estimateFiveDays ? (
+            {Context.loading ? (
                 <ActivityIndicator size={50}/>
             ) : (
                 <FlatList

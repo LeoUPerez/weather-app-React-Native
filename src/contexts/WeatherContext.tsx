@@ -4,25 +4,38 @@ import React, {
     createContext,
     useState,
 } from "react";
-import {Forecast} from "../models/ForecastModel";
 import {ContextProviderProps} from "../@types/context-provider-props";
-import {Root} from "../models/ModelPrueba";
+import {CustomCity} from "../models/CustomCityModel";
 
 interface ContextType {
-    city: Root | undefined;
-    setCity: Dispatch<SetStateAction<Root | undefined>>;
+    city: CustomCity | undefined;
+    setCity: Dispatch<SetStateAction<CustomCity | undefined>>;
+    loading: boolean;
+    onLoading: () => void;
+    offLoading: () => void
 }
 
-export const weatherContext = createContext<ContextType>({} as any);
+export const weatherContext = createContext<ContextType>({} as ContextType);
 
 export const WeatherContextProvider = ({children}: ContextProviderProps) => {
-    const [city, setCity] = useState<Root>();
+    const [city, setCity] = useState<CustomCity>();
+    const [loading, setLoading] = useState<boolean>(true);
+
+   const onLoading = () => {
+        setLoading(true);
+   }
+   const offLoading = () => {
+        setLoading(false);
+   }
 
     return (
         <weatherContext.Provider
             value={{
                 city,
+                loading,
                 setCity,
+                onLoading,
+                offLoading
             }}
         >
             {children}
