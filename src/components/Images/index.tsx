@@ -1,6 +1,5 @@
 import {Image, ImageStyle, StyleProp} from 'react-native';
 
-// import PngImages from '../../assets/images';
 import clearImageSrc from '../../assets/images/clear.png';
 import CloudsImageSrc from '../../assets/images/clouds.png';
 import DrizzleImageSrc from '../../assets/images/drizzle.png';

@@ -1,23 +1,23 @@
 import {Dimensions, ScrollView, StyleSheet, View} from "react-native";
 import RouterNavigator from "./src/routes/Router";
-// import {ContextProvider} from "./src/contexts/WeatherContext";
-import {} from '@supabase/supabase-js'
-import onAuthenticate from "./src/auth/onAuthenticate";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import * as Location from "expo-location";
+import * as LocalAuthentication from "expo-local-authentication";
 
 const windowHeight = Dimensions.get("window").height;
 
 export default function App() {
 
-
- // const authenticate = onAuthenticate()
+    useEffect(() => {
+        LocalAuthentication.authenticateAsync().then(async (res) => {
+            await Location.requestForegroundPermissionsAsync();
+        });
+    }, []);
 
     return (
         <ScrollView>
             <View style={styles.container_style}>
-                {/*<ContextProvider>*/}
                 <RouterNavigator/>
-                {/*</ContextProvider>*/}
             </View>
         </ScrollView>
     );

@@ -1,6 +1,6 @@
 import {CardForecast} from "./CardForecastModel";
 
-export interface CustomCity  {
+export interface CustomCity {
     name: string
     temp: number
     temp_max: number
@@ -9,5 +9,5 @@ export interface CustomCity  {
     estimateFiveDays?: Array<CardForecast>
     lat: number
     lon: number
-    loading?: boolean
+    main: string
 }

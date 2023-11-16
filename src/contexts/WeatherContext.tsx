@@ -11,22 +11,17 @@ interface ContextType {
     city: CustomCity | undefined;
     setCity: Dispatch<SetStateAction<CustomCity | undefined>>;
     loading: boolean;
-    onLoading: () => void;
-    offLoading: () => void
+    OnOffLoading: (loading: boolean) => void;
 }
 
 export const weatherContext = createContext<ContextType>({} as ContextType);
-
 export const WeatherContextProvider = ({children}: ContextProviderProps) => {
     const [city, setCity] = useState<CustomCity>();
     const [loading, setLoading] = useState<boolean>(true);
 
-   const onLoading = () => {
-        setLoading(true);
-   }
-   const offLoading = () => {
-        setLoading(false);
-   }
+    const onOffLoading = (loading: boolean) => {
+        setLoading(loading);
+    }
 
     return (
         <weatherContext.Provider
@@ -34,8 +29,7 @@ export const WeatherContextProvider = ({children}: ContextProviderProps) => {
                 city,
                 loading,
                 setCity,
-                onLoading,
-                offLoading
+                OnOffLoading: onOffLoading,
             }}
         >
             {children}

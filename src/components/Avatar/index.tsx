@@ -4,7 +4,6 @@ import {useContext} from "react";
 import {expoCamContext} from "../../contexts/ExpoCamContext";
 
 export default function Avatar() {
-
     const Context = useContext(expoCamContext);
 
     return (

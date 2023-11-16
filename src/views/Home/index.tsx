@@ -15,9 +15,8 @@ import ExpoCam from "../../components/ExpoCam";
 import {ExpoCamContextProvider} from "../../contexts/ExpoCamContext";
 import EstimatedFiveDayForecast from "../../components/EstimatedFiveDayForecast";
 
-
 export default function HomeView() {
-    console.log("HomeView")
+
     return (
         <View style={styles.container}>
             <WeatherContextProvider>

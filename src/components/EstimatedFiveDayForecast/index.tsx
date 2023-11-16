@@ -1,13 +1,16 @@
 import {ActivityIndicator, FlatList, View} from "react-native";
 import ForecastCardInfo from "../ForecastCardInfo";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import {weatherContext} from "../../contexts/WeatherContext";
-
 
 export default function EstimatedFiveDayForecast() {
     const Context = useContext(weatherContext);
 
-    console.log("EstimatedFiveDayForecast")
+    useEffect(() => {
+        setTimeout(() => {
+            Context.OnOffLoading(false);
+        }, 2000);
+    }, [Context]);
 
     return (
         <View>

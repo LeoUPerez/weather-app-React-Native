@@ -3,36 +3,40 @@ import {City} from "../models/CityModel";
 import {Forecast} from "../models/ForecastModel";
 import {weatherContext} from "../contexts/WeatherContext";
 import {CustomCity} from "../models/CustomCityModel";
-
+import {Alert} from "react-native";
+import {CardForecast} from "../models/CardForecastModel";
 
 export default function useFetch() {
     const ContextWeather = useContext(weatherContext);
     const getWeatherCity = async (url: string) => {
-        ContextWeather.onLoading();
-
         try {
-            const data = await fetch(url)
+            await fetch(url)
                 .then(async (res) => {
-                    const ApiResponse: City = await res.json();
-                    return {
-                        name: ApiResponse.name,
-                        temp: Math.trunc(ApiResponse.main.temp),
-                        temp_max: Math.trunc(ApiResponse.main.temp_max),
-                        humidity: ApiResponse.main.humidity,
-                        wind_speed: ApiResponse.wind.speed,
-                        weather: ApiResponse.weather[0].main,
-                        lat: ApiResponse.coord.lat,
-                        lon: ApiResponse.coord.lon,
+                    if (res.ok) {
+                        ContextWeather.OnOffLoading(true);
+                        const ApiResponse: City = await res.json();
+                        const data = {
+                            name: ApiResponse.name,
+                            temp: Math.trunc(ApiResponse.main.temp),
+                            temp_max: Math.trunc(ApiResponse.main.temp_max),
+                            humidity: ApiResponse.main.humidity,
+                            wind_speed: ApiResponse.wind.speed,
+                            weather: ApiResponse.weather[0].main,
+                            lat: ApiResponse.coord.lat,
+                            lon: ApiResponse.coord.lon,
+                            main: ApiResponse.weather[0].main
+                        }
+                        getForecastCity(data)
+                    } else {
+                        Alert.alert("Error", "City not found")
                     }
                 })
-            getForecastCity(data)
         } catch (e) {
             console.log(e + " Error useFetch")
         }
     }
-
     const getForecastCity = (weather: CustomCity) => {
-        let list: any = [];
+        let list: CardForecast[] = [];
         fetch(
             `https://api.openweathermap.org/data/2.5/forecast?lat=${weather.lat}&lon=${weather.lon}&appid=${process.env.API_ID}&units=metric`
         ).then(async (response) => {
@@ -56,13 +60,9 @@ export default function useFetch() {
                 estimateFiveDays: list,
                 lat: weather.lat,
                 lon: weather.lon,
-                loading: true,
+                main: weather.main
             })
         });
-
-        setTimeout(() => {
-            ContextWeather.offLoading();
-        }, 1500);
     }
     return {getWeatherCity, getForecastCity}
 }
