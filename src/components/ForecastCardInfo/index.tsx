@@ -16,19 +16,19 @@ export default function ForecastCardInfo({data}: PropsType) {
 
     return (
         <LinearGradient
-            style={styles.card_style}
+            style={styles.Card}
             colors={["rgba(69,121,241,255)", "transparent"]}
             end={{x: 2.8, y: 0}}
             start={{x: 2, y: 1}}
         >
-            <Text style={{color: "white", fontWeight: "bold", fontSize: 10}}>
+            <Text style={styles.Hour}>
                 {data.item.hour}
             </Text>
-            <Text style={{color: "white", fontWeight: "bold", fontSize: 10}}>
+            <Text style={styles.Date}>
                 {data.item.date}
             </Text>
             {CustomImage && <CustomImage style={styles.Image}/>}
-            <Text style={{color: "white", fontWeight: "bold"}}>
+            <Text style={styles.Temp}>
                 {data.item.temp} C°
             </Text>
         </LinearGradient>

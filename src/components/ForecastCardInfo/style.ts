@@ -1,19 +1,33 @@
 import {StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
-    card_style: {
-      width: 85,
-      height: 110,
-      padding: 3,
-      marginHorizontal: 4,
-      backgroundColor: "blue",
-      borderRadius: 15,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
+    Card: {
+        width: 85,
+        height: 110,
+        padding: 3,
+        marginHorizontal: 4,
+        backgroundColor: "blue",
+        borderRadius: 15,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    Hour: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 10
+    },
+    Date: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 10
+    },
+    Temp: {
+        color: "white",
+        fontWeight: "bold"
     },
     Image: {
-      width: 45,
-      height: 45,
+        width: 45,
+        height: 45,
     },
-  });
+});
