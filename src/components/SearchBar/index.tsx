@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {TextInput, View} from "react-native";
 import {styles} from "./style";
 import useFetch from "../../hooks/useFetch";
@@ -6,12 +6,12 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function SearchBar() {
     const {getWeatherCity} = useFetch();
-    let searchCity: string = "";
+    const [searchCity, setSearchCity] = useState("")
 
     return (
         <View style={styles.container}>
             <TextInput
-                onChangeText={(value) => searchCity = value}
+                onChangeText={(value) => setSearchCity(value)}
                 style={styles.Input}
                 placeholder="Search City"
             />
