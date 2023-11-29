@@ -1,8 +1,9 @@
-import {Dimensions, ScrollView, StyleSheet, View} from "react-native";
+import {Dimensions, StyleSheet, View} from "react-native";
 import RouterNavigator from "./src/routes/Router";
 import {useEffect} from "react";
 import * as Location from "expo-location";
 import * as LocalAuthentication from "expo-local-authentication";
+import {DataBaseContextProvider} from "./src/contexts/DataBaseContext";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -15,11 +16,11 @@ export default function App() {
     }, []);
 
     return (
-        <ScrollView>
-            <View style={styles.container_style}>
+        <View style={styles.container_style}>
+            <DataBaseContextProvider>
                 <RouterNavigator/>
-            </View>
-        </ScrollView>
+            </DataBaseContextProvider>
+        </View>
     );
 }
 
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     container_style: {
         backgroundColor: "rgba(13, 151, 242, 0.15)",
         width: "100%",
-        minHeight: windowHeight,
+        minHeight: windowHeight - 30,
         marginTop: 30,
     },
 });
