@@ -2,20 +2,25 @@ import {
     View,
     Text,
 } from "react-native";
-import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {WeatherContextProvider} from "../../contexts/WeatherContext";
-import {useNavigation} from "@react-navigation/native";
-import {RootStackPramList} from "../../@types/stack-navigation";
 import Header from "../../components/Header";
 import EstimatedDayForecast from "../../components/EstimatedDayForecast";
 import EstimatedDayTemp from "../../components/EstimatedDayTemp";
-import IconBtn from "../../components/IconBtn";
 import {styles} from "./style";
 import ExpoCam from "../../components/ExpoCam";
 import {ExpoCamContextProvider} from "../../contexts/ExpoCamContext";
 import EstimatedFiveDayForecast from "../../components/EstimatedFiveDayForecast";
+import {useContext, useEffect} from "react";
+import {dataBaseContext} from "../../contexts/DataBaseContext";
+import FavoritesCities from "../../components/FavoritesCities/FavoritesCities";
 
 export default function HomeView() {
+
+    const Context = useContext(dataBaseContext);
+
+    useEffect(() => {
+        Context.checkDeviceExistence();
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -31,17 +36,12 @@ export default function HomeView() {
                         <Text style={{fontWeight: "bold", color: "rgb(33, 97, 140)"}}>
                             Today
                         </Text>
-                        {/*<IconBtn*/}
-                        {/*    func={() => navi.navigate("FavoriteCity")}*/}
-                        {/*    text="5 day weather forecast"*/}
-                        {/*    name="chevron-forward-outline"*/}
-                        {/*/>*/}
                     </View>
                     <EstimatedFiveDayForecast/>
                 </View>
+                <FavoritesCities horizontal={true}/>
             </WeatherContextProvider>
         </View>
     );
 }
 
-// const navi = useNavigation<NativeStackNavigationProp<RootStackPramList>>();

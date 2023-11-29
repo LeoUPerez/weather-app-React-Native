@@ -33,7 +33,6 @@ export const ExpoCamContextProvider = ({children}: ContextProviderProps) => {
 
         if (!result.canceled) {
             setImage(result.assets[0]!.uri);
-            // uploadImageDB();
         }
     }
 

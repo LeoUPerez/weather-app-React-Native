@@ -7,6 +7,8 @@ import * as Images from "../Images";
 import useFetch from "../../hooks/useFetch";
 import * as Location from "expo-location";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import {dataBaseContext} from "../../contexts/DataBaseContext";
+import FavoriteStar from "../FavoriteStar/FavoriteStar";
 
 export default function EstimatedDayTemp() {
     const Context = useContext(weatherContext);
@@ -16,9 +18,9 @@ export default function EstimatedDayTemp() {
         Location.getCurrentPositionAsync({}).then(({coords}) => getWeatherCity(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${process.env.API_ID}&units=metric`));
     }, []);
 
+
     const key = `Image${Context?.city?.main}`;
     const CustomImage = Images.hasOwnProperty(key) ? (Images as any)[key] : null;
-
 
     return (
         <View style={styles.Container}>
@@ -27,6 +29,8 @@ export default function EstimatedDayTemp() {
                 <Text style={styles.cityTextStyle}>
                     {Context?.city && Context?.city?.name}
                 </Text>
+                {/* star-outline rgba(23, 32, 42, .5) / star rgb(241, 196, 15 ) */}
+                <FavoriteStar/>
             </View>
             <LinearGradient
                 colors={["rgba(69,121,241,255)", "transparent"]}
