@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {City} from "../models/CityModel";
 import {Forecast} from "../models/ForecastModel";
 import {weatherContext} from "../contexts/WeatherContext";
@@ -8,6 +8,7 @@ import {CardForecast} from "../models/CardForecastModel";
 
 export default function useFetch() {
     const ContextWeather = useContext(weatherContext);
+
     const getWeatherCity = async (url: string) => {
         try {
             await fetch(url)
@@ -26,7 +27,7 @@ export default function useFetch() {
                             lon: ApiResponse.coord.lon,
                             main: ApiResponse.weather[0].main
                         }
-                        getForecastCity(data)
+                        getForecastCity(data);
                     } else {
                         Alert.alert("Error", "City not found")
                     }
@@ -34,6 +35,7 @@ export default function useFetch() {
         } catch (e) {
             console.log(e + " Error useFetch")
         }
+
     }
     const getForecastCity = (weather: CustomCity) => {
         let list: CardForecast[] = [];
