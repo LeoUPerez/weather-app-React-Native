@@ -11,8 +11,7 @@ export const styles = StyleSheet.create({
     },
     ContainerForecastStyle: {
         width: "100%",
-        height: 170,
-        padding: 15,
+        padding: 10,
     },
     DaysForecastHeader: {
         width: "100%",
