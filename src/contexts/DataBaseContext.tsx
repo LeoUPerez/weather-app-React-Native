@@ -1,9 +1,7 @@
-import {createContext, Dispatch, SetStateAction, useContext, useEffect, useState} from "react";
+import {createContext, useState} from "react";
 import {ContextProviderProps} from "../@types/context-provider-props";
 import * as Device from 'expo-device';
 import {supabase} from "../supabase/initSupabase";
-import {CustomCity} from "../models/CustomCityModel";
-import {weatherContext} from "./WeatherContext";
 
 interface ContextType {
     RegisterDevice: () => void;
@@ -11,6 +9,7 @@ interface ContextType {
     loading: boolean;
     onOffLoading: (loading: boolean) => void;
     getFavoriteCities: () => void;
+    UpdateFavoriteCities: (favoriteCity: boolean, cityName: string) => void;
     cities_fav: any;
     checkFavoriteCity: (cityName: string) => void;
     favorite: boolean;
@@ -40,14 +39,18 @@ export const DataBaseContextProvider = ({children}: ContextProviderProps) => {
         const {data, error} = await supabase
             .from('devices')
             .insert([
-                {id: deviceName, favorite_cities: [{}, {}, {}]},
+                {id: deviceName, favorite_cities: []},
             ]);
         await getFavoriteCities();
     }
 
     async function getFavoriteCities() {
-        // console.log("getFavoriteCities")
-        onOffLoading(true);
+        if (cities_fav.length == 0) {
+            onOffLoading(true);
+            setTimeout(() => {
+                onOffLoading(false);
+            }, 1500);
+        }
         await supabase
             .from('devices')
             .select('favorite_cities')
@@ -56,29 +59,28 @@ export const DataBaseContextProvider = ({children}: ContextProviderProps) => {
                 setCities_fav(res.data?.[0].favorite_cities);
             });
 
-        // setCities_fav(devices![0].favorite_cities);
 
-        setTimeout(() => {
-            onOffLoading(false);
-        }, 1500);
     }
 
     function onOffLoading(loading: boolean) {
         setLoading(loading);
     }
 
-    async function UpdateFavoriteCities() {
-        const {data, error} = await supabase
-            .from('devices')
-            .update({favorite_cities: [{name: ""}, {name: ""}, {name: "Santiago de los Caballeros"}, {name: ""}]})
-            .eq('id', deviceName)
-
-        if (error) {
-            console.log(error);
-            return;
+    async function UpdateFavoriteCities(favoriteCity: boolean, cityName: string) {
+        setFavorite(!favoriteCity);
+        if (favoriteCity) {
+            const {data, error} = await supabase
+                .from('devices')
+                .update({favorite_cities: cities_fav.filter((city: any) => city.name != cityName)})
+                .eq('id', deviceName)
         } else {
-            console.log(data);
+            cities_fav.push({name: cityName});
+            const {data, error} = await supabase
+                .from('devices')
+                .update({favorite_cities: cities_fav})
+                .eq('id', deviceName)
         }
+        await getFavoriteCities();
     }
 
     async function checkFavoriteCity(nameCity: string) {
@@ -100,6 +102,7 @@ export const DataBaseContextProvider = ({children}: ContextProviderProps) => {
             checkDeviceExistence,
             loading,
             onOffLoading,
+            UpdateFavoriteCities,
             cities_fav,
             getFavoriteCities,
             checkFavoriteCity,
