@@ -19,7 +19,7 @@ export const WeatherContextProvider = ({children}: ContextProviderProps) => {
     const [city, setCity] = useState<CustomCity>();
     const [loading, setLoading] = useState<boolean>(true);
 
-    const onOffLoading = (loading: boolean) => {
+    function onOffLoading (loading: boolean) {
         setLoading(loading);
     }
 
