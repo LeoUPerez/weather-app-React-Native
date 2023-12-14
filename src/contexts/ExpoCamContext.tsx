@@ -10,13 +10,14 @@ interface ContextType {
     camera: any;
     takePicture: () => void;
     selectActions: () => void;
+    cancelPicture: () => void;
     stateCamera: boolean;
     setStateCamera: Dispatch<SetStateAction<boolean>>;
     setImage: Dispatch<SetStateAction<string>>;
     image: string;
 }
 
-export const expoCamContext = createContext<ContextType>({} as any);
+export const expoCamContext = createContext<ContextType>({} as ContextType);
 
 export const ExpoCamContextProvider = ({children}: ContextProviderProps) => {
     const [stateCamera, setStateCamera] = useState(false);
@@ -54,7 +55,9 @@ export const ExpoCamContextProvider = ({children}: ContextProviderProps) => {
                 text: 'Take photo',
                 onPress: async () => getPermissionsCam(),
             },
-        ])
+        ], {
+            cancelable: true,
+        })
     }
 
     function takePicture() {
@@ -62,6 +65,10 @@ export const ExpoCamContextProvider = ({children}: ContextProviderProps) => {
             setImage(data.uri);
             setStateCamera(false)
         });
+    }
+
+    function cancelPicture() {
+        setStateCamera(false);
     }
 
     return (
@@ -72,6 +79,7 @@ export const ExpoCamContextProvider = ({children}: ContextProviderProps) => {
                 setImage,
                 setStateCamera,
                 stateCamera,
+                cancelPicture,
                 searchPicGallery,
                 getPermissionsCam,
                 selectActions,
