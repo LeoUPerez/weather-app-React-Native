@@ -1,4 +1,4 @@
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 import {ContextProviderProps} from "../@types/context-provider-props";
 import * as Device from 'expo-device';
 import {supabase} from "../supabase/initSupabase";
@@ -9,17 +9,15 @@ interface ContextType {
     loading: boolean;
     onOffLoading: (loading: boolean) => void;
     getFavoriteCities: () => void;
-    UpdateFavoriteCities: (favoriteCity: boolean, cityName: string) => void;
+    UpdateFavoriteCities: (cityName: string, favorite: boolean) => void;
     cities_fav: any;
-    checkFavoriteCity: (cityName: string) => void;
-    favorite: boolean;
+    checkFavoriteCity: (cityName: string) => Promise<boolean>;
 }
 
 export const dataBaseContext = createContext({} as ContextType);
 
 export const DataBaseContextProvider = ({children}: ContextProviderProps) => {
     const [loading, setLoading] = useState(true);
-    const [favorite, setFavorite] = useState(false);
     const [cities_fav, setCities_fav] = useState<Array<any>>([]);
     const deviceName = Device.deviceName;
 
@@ -29,71 +27,60 @@ export const DataBaseContextProvider = ({children}: ContextProviderProps) => {
             .select('*')
             .eq('id', deviceName);
 
-        if (device!.length == 0)
-            await RegisterDevice();
-        else
+        if (device!.length != 0)
             await getFavoriteCities();
+        else
+            await RegisterDevice();
     }
 
-    const RegisterDevice = async () => {
-        const {data, error} = await supabase
+    async function RegisterDevice() {
+        await supabase
             .from('devices')
             .insert([
                 {id: deviceName, favorite_cities: []},
             ]);
-        await getFavoriteCities();
     }
 
     async function getFavoriteCities() {
-        if (cities_fav.length == 0) {
-            onOffLoading(true);
-            setTimeout(() => {
-                onOffLoading(false);
-            }, 1500);
-        }
         await supabase
             .from('devices')
             .select('favorite_cities')
             .eq('id', deviceName)
             .then((res) => {
                 setCities_fav(res.data?.[0].favorite_cities);
+                setLoading(false);
             });
-
-
     }
 
     function onOffLoading(loading: boolean) {
         setLoading(loading);
+
+        setTimeout(() => {
+            setLoading(false);
+        }, 1500);
     }
 
-    async function UpdateFavoriteCities(favoriteCity: boolean, cityName: string) {
-        setFavorite(!favoriteCity);
-        if (favoriteCity) {
-            const {data, error} = await supabase
-                .from('devices')
-                .update({favorite_cities: cities_fav.filter((city: any) => city.name != cityName)})
-                .eq('id', deviceName)
-        } else {
+    async function UpdateFavoriteCities(cityName: string, favorit: boolean) {
+        if (favorit) {
             cities_fav.push({name: cityName});
-            const {data, error} = await supabase
+            await supabase
                 .from('devices')
                 .update({favorite_cities: cities_fav})
+                .eq('id', deviceName)
+
+        } else {
+
+            await supabase
+                .from('devices')
+                .update({favorite_cities: cities_fav.filter((city: any) => city.name != cityName)})
                 .eq('id', deviceName)
         }
         await getFavoriteCities();
     }
 
     async function checkFavoriteCity(nameCity: string) {
-        if (cities_fav.length == 0) {
-            await getFavoriteCities();
-            return;
-        }
         const validatorCityFav = await cities_fav!.find((city: any) => city.name == nameCity);
-        if (validatorCityFav != undefined) {
-            setFavorite(true);
-        } else {
-            setFavorite(false);
-        }
+        return validatorCityFav != undefined;
     }
 
     return (
@@ -106,7 +93,6 @@ export const DataBaseContextProvider = ({children}: ContextProviderProps) => {
             cities_fav,
             getFavoriteCities,
             checkFavoriteCity,
-            favorite
         }}>
             {children}
         </dataBaseContext.Provider>
