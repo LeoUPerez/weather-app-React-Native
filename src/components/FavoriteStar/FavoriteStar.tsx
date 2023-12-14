@@ -1,23 +1,35 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {useContext, useEffect} from "react";
-import {dataBaseContext} from "../../contexts/DataBaseContext";
-import {weatherContext} from "../../contexts/WeatherContext";
+import {useContext, useEffect, useState} from "react";
 import {TouchableOpacity} from "react-native";
+import {dataBaseContext, weatherContext} from "../../contexts";
 
 export default function FavoriteStar() {
     const ContextDB = useContext(dataBaseContext);
     const Context = useContext(weatherContext);
+    const [favorite, setFavorite] = useState<boolean>(false);
 
     useEffect(() => {
-        ContextDB.checkFavoriteCity(Context.city?.name!);
-    }, [Context.city!?.name]);
+        ContextDB.checkFavoriteCity(Context.city?.name!).then((res: boolean) => {
+            setFavorite(res!);
+        });
+    }, [ContextDB.cities_fav]);
+
+    useEffect(() => {
+        ContextDB.checkFavoriteCity(Context.city?.name!).then((res: boolean) => {
+            setFavorite(res!);
+        });
+    }, [Context.city]);
 
     return (
-        <TouchableOpacity style={{zIndex: 1}}
-                          onPress={() => ContextDB.UpdateFavoriteCities(ContextDB.favorite, Context.city!?.name)}>
+        <TouchableOpacity
+            onPress={() => {
+                setFavorite(!favorite);
+                ContextDB.UpdateFavoriteCities(Context.city!?.name, !favorite);
+            }}>
             <Ionicons
-                name={ContextDB.favorite ? "star" : "star-outline"} style={{zIndex: 0}} size={30}
-                color={ContextDB.favorite ? "rgb(241, 196, 15 )" : "rgba(23, 32, 42, .5)"}/>
+                name={favorite ? "star" : "star-outline"}
+                size={30}
+                color={favorite ? "rgb(241, 196, 15 )" : "rgba(23, 32, 42, .5)"}/>
         </TouchableOpacity>
     )
 }
