@@ -1,10 +1,10 @@
 import {useContext, useEffect} from "react";
 import {City} from "../models/CityModel";
 import {Forecast} from "../models/ForecastModel";
-import {weatherContext} from "../contexts/WeatherContext";
 import {CustomCity} from "../models/CustomCityModel";
 import {Alert} from "react-native";
 import {CardForecast} from "../models/CardForecastModel";
+import {weatherContext} from "../contexts";
 
 export default function useFetch() {
     const ContextWeather = useContext(weatherContext);
