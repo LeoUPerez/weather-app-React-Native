@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
         width: "70%",
         height: "65%",
         borderRadius: 20,
+        marginBottom: 5,
         position: "relative",
     },
     Gradient: {
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
     },
     cityTextStyle: {
         color: "rgb(33, 97, 140)",
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: "bold",
         textAlign: "center",
     },
@@ -32,6 +33,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         gap: 5,
+        zIndex: 1,
         marginBottom: 5,
     },
     IconStyle: {

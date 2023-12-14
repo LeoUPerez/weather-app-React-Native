@@ -11,8 +11,7 @@ export const styles = StyleSheet.create({
     container: {
         width: '85%',
         display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: 'column',
         gap: 5,
     },
 });
