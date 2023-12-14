@@ -1,7 +1,7 @@
 import {Text, View} from "react-native";
 import {useContext} from "react";
-import {dataBaseContext} from "../../contexts/DataBaseContext";
 import FavoritesCities from "../../components/FavoritesCities/FavoritesCities";
+import {dataBaseContext} from "../../contexts";
 
 export default function CitiesFavView() {
     const Context = useContext(dataBaseContext);

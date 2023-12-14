@@ -1,14 +1,13 @@
 import {LinearGradient} from "expo-linear-gradient";
 import {useContext, useEffect} from "react";
 import {Text, View} from "react-native";
-import {weatherContext} from "../../contexts/WeatherContext";
 import {styles} from "./style";
 import * as Images from "../Images";
 import useFetch from "../../hooks/useFetch";
 import * as Location from "expo-location";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {dataBaseContext} from "../../contexts/DataBaseContext";
 import FavoriteStar from "../FavoriteStar/FavoriteStar";
+import {weatherContext} from "../../contexts";
 
 export default function EstimatedDayTemp() {
     const Context = useContext(weatherContext);
@@ -29,7 +28,6 @@ export default function EstimatedDayTemp() {
                 <Text style={styles.cityTextStyle}>
                     {Context?.city && Context?.city?.name}
                 </Text>
-                {/* star-outline rgba(23, 32, 42, .5) / star rgb(241, 196, 15 ) */}
                 <FavoriteStar/>
             </View>
             <LinearGradient

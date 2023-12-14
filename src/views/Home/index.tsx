@@ -11,8 +11,8 @@ import ExpoCam from "../../components/ExpoCam";
 import {ExpoCamContextProvider} from "../../contexts/ExpoCamContext";
 import EstimatedFiveDayForecast from "../../components/EstimatedFiveDayForecast";
 import {useContext, useEffect} from "react";
-import {dataBaseContext} from "../../contexts/DataBaseContext";
 import FavoritesCities from "../../components/FavoritesCities/FavoritesCities";
+import {dataBaseContext} from "../../contexts";
 
 export default function HomeView() {
 
