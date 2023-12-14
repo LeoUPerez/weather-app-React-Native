@@ -1,11 +1,13 @@
-import {ActivityIndicator, FlatList, View} from "react-native";
+import {ActivityIndicator, FlatList, Text, View} from "react-native";
 import IconBtn from "../IconBtn";
 import {LinearGradient} from "expo-linear-gradient";
-import {useContext} from "react";
-import {dataBaseContext} from "../../contexts/DataBaseContext";
+import {useContext, useEffect} from "react";
 import {useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {RootStackPramList} from "../../@types/stack-navigation";
+import FavoriteCityItem from "../FavoriteCityItem";
+import FavoriteCityItemSkeleton, {ForecastCardInfoSkeleton} from "../Skeletons";
+import {dataBaseContext} from "../../contexts";
 
 interface FavoritesCitiesProps {
     horizontal: boolean;
@@ -22,6 +24,8 @@ export default function FavoritesCities({horizontal}: FavoritesCitiesProps) {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            alignContent: Context.cities_fav.length == 1 ? "flex-start" : "center",
+
         }}>
             <View style={{
                 width: "100%",
@@ -40,24 +44,27 @@ export default function FavoritesCities({horizontal}: FavoritesCitiesProps) {
             </View>
             {
                 Context.loading ?
-                    <ActivityIndicator size={50}/> :
-                    <FlatList style={{
-                        marginHorizontal: 10.5,
-                    }} data={Context.cities_fav} showsHorizontalScrollIndicator={false} horizontal={horizontal}
-                              renderItem={() =>
-                                  <LinearGradient
-                                      style={{
-                                          width: horizontal ? 175 : "97%",
-                                          height: horizontal ? "100%" : 100,
-                                          borderRadius: 15,
-                                          marginHorizontal: 4,
-                                          marginVertical: horizontal ? 0 : 4,
-                                      }}
-                                      colors={["rgba(69,121,241,255)", "transparent"]}
-                                      end={{x: 2.8, y: 0}}
-                                      start={{x: 2, y: 1}}
-                                  ></LinearGradient>
-                              }/>
+                    <FlatList
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
+                        ItemSeparatorComponent={() => <View style={{width: 4.5}}/>}
+                        renderItem={() => <FavoriteCityItemSkeleton horizontal={horizontal}/>}
+                    />
+                    :
+                    Context.cities_fav.length > 0 ?
+                        <FlatList style={{marginHorizontal: 10.5,}}
+                                  data={Context.cities_fav}
+                                  ItemSeparatorComponent={() => <View style={{width: 4.5}}/>}
+                                  showsHorizontalScrollIndicator={false} horizontal={horizontal}
+                                  renderItem={({index}) =>
+                                      <FavoriteCityItem data={Context.cities_fav[index]} horizontal={horizontal}/>
+                                  }/> :
+                        <Text style={{
+                            height: "100%",
+                        }}>
+                            No favorite cities
+                        </Text>
             }
         </View>
     )
