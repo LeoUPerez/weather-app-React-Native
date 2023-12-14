@@ -29,7 +29,7 @@ export default function FavoritesCities({horizontal}: FavoritesCitiesProps) {
         }}>
             <View style={{
                 width: "100%",
-                display: "flex",
+                display: "none",
                 alignItems: "flex-end",
             }}>
                 {
@@ -38,7 +38,8 @@ export default function FavoritesCities({horizontal}: FavoritesCitiesProps) {
                             func={() => navi.navigate("FavoriteCity")}
                             text="Favorite Cities"
                             name="chevron-forward-outline"
-                        /> :
+                        />
+                        :
                         null
                 }
             </View>
