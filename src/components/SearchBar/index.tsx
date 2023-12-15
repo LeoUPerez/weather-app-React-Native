@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {FlatList, Keyboard, Pressable, Text, TextInput, View} from "react-native";
 import {styles} from "./style";
 import useFetch from "../../hooks/useFetch";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {SuggestionsModel} from "../../models/SuggestionsModel";
+import {weatherContext} from "../../contexts";
 
 export default function SearchBar() {
     const {getWeatherCity} = useFetch();
+    const Context = useContext(weatherContext);
     const [searchCity, setSearchCity] = useState<string>("");
     const [visibleSuggestions, setVisibleSuggestions] = useState<boolean>(false);
     const [focus, setFocus] = useState<boolean>(false);
@@ -23,6 +25,10 @@ export default function SearchBar() {
         if (searchCity.length == 0)
             setVisibleSuggestions(false)
     }, [searchCity]);
+
+    useEffect(() => {
+        setSearchCity("")
+    }, [Context.city!?.name]);
 
     useEffect(() => {
         Keyboard.addListener("keyboardDidHide", () => {
