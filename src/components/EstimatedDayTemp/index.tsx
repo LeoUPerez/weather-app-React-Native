@@ -18,8 +18,8 @@ export default function EstimatedDayTemp() {
     }, []);
 
 
-    const key = `Image${Context?.city?.main}`;
-    const CustomImage = Images.hasOwnProperty(key) ? (Images as any)[key] : null;
+    // const key = `Image${Context?.city?.main}`;
+    // const CustomImage = Images.hasOwnProperty(key) ? (Images as any)[key] : null;
 
     return (
         <View style={styles.Container}>
@@ -40,7 +40,7 @@ export default function EstimatedDayTemp() {
                         ? Context?.city?.temp.toString().split(".")[0]
                         : 0}°
                 </Text>
-                {CustomImage && <CustomImage style={styles.Image}/>}
+                {/*{CustomImage && <CustomImage style={styles.Image}/>}*/}
             </LinearGradient>
         </View>
     );

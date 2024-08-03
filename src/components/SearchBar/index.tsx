@@ -15,13 +15,14 @@ export default function SearchBar() {
     const [suggestions, setSuggestions] = useState<Array<SuggestionsModel>>([]);
 
     useEffect(() => {
-        fetch(`https://api.locationiq.com/v1/autocomplete?key=${process.env.ACCESS_TOKEN_LOCATIONIQ}&q=${searchCity}&limit=6&dedupe=1`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.error == undefined) {
-                    setSuggestions(data);
-                }
-            })
+        console.log(process.env.ACCESS_TOKEN_LOCATIONIQ)
+        // fetch(`https://api.locationiq.com/v1/autocomplete?key=${process.env.ACCESS_TOKEN_LOCATIONIQ}&q=${searchCity}&limit=6&dedupe=1`)
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         if (data.error == undefined) {
+        //             setSuggestions(data);
+        //         }
+        //     })
         if (searchCity.length == 0)
             setVisibleSuggestions(false)
     }, [searchCity]);

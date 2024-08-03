@@ -10,9 +10,9 @@ const windowHeight = Dimensions.get("window").height;
 export default function App() {
 
     useEffect(() => {
-        LocalAuthentication.authenticateAsync().then(async (res) => {
-            await Location.requestForegroundPermissionsAsync();
-        });
+        // LocalAuthentication.authenticateAsync().then(async (res) => {
+        //     await Location.requestForegroundPermissionsAsync();
+        // });
     }, []);
 
     return (

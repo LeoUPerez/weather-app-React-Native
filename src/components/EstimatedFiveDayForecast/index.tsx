@@ -1,17 +1,18 @@
 import {ActivityIndicator, FlatList, View} from "react-native";
 import ForecastCardInfo from "../ForecastCardInfo";
 import {useContext, useEffect} from "react";
-import {weatherContext} from "../../contexts/WeatherContext";
+import {weatherContext} from "../../contexts";
 import {ForecastCardInfoSkeleton} from "../Skeletons";
 
 export default function EstimatedFiveDayForecast() {
     const Context = useContext(weatherContext);
 
     useEffect(() => {
-        setTimeout(() => {
-            Context.OnOffLoading(false);
-        }, 2000);
-    }, [Context]);
+        // setTimeout(() => {
+        //     Context.OnOffLoading(false);
+        // }, 2000);
+        console.log(Context.loading)
+    }, [Context.loading]);
 
     return (
         <View>
@@ -21,7 +22,8 @@ export default function EstimatedFiveDayForecast() {
                         showsHorizontalScrollIndicator={false}
                         data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
                         ItemSeparatorComponent={() => <View style={{width: 4.5}}/>}
-                        renderItem={() => <ForecastCardInfoSkeleton/>}
+                        renderItem={() => <>Cargando</>}
+                        // renderItem={() => <ForecastCardInfoSkeleton/>}
                     />
 
             ) : (

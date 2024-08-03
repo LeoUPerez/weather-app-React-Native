@@ -15,7 +15,9 @@ export default function useFetch() {
                 .then(async (res) => {
                     if (res.ok) {
                         ContextWeather.OnOffLoading(true);
-                        const ApiResponse: City = await res.json();
+                        const ApiResponse: City = await res.json().finally(() => {
+                            ContextWeather.OnOffLoading(false);
+                        });
                         const data = {
                             name: ApiResponse.name,
                             temp: Math.trunc(ApiResponse.main.temp),

@@ -6,7 +6,7 @@ import {useNavigation} from "@react-navigation/native";
 import {NativeStackNavigationProp} from "@react-navigation/native-stack";
 import {RootStackPramList} from "../../@types/stack-navigation";
 import FavoriteCityItem from "../FavoriteCityItem";
-import FavoriteCityItemSkeleton, {ForecastCardInfoSkeleton} from "../Skeletons";
+// import FavoriteCityItemSkeleton, {ForecastCardInfoSkeleton} from "../Skeletons";
 import {dataBaseContext} from "../../contexts";
 
 interface FavoritesCitiesProps {
@@ -50,7 +50,8 @@ export default function FavoritesCities({horizontal}: FavoritesCitiesProps) {
                         showsHorizontalScrollIndicator={false}
                         data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
                         ItemSeparatorComponent={() => <View style={{width: 4.5}}/>}
-                        renderItem={() => <FavoriteCityItemSkeleton horizontal={horizontal}/>}
+                        renderItem={()=> <Text>cargando</Text>}
+                        // renderItem={() => <FavoriteCityItemSkeleton horizontal={horizontal}/>}
                     />
                     :
                     Context.cities_fav.length > 0 ?

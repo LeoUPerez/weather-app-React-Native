@@ -11,8 +11,8 @@ interface PropsType {
 export default function ForecastCardInfo({data}: PropsType) {
     const {weather} = data.item;
 
-    const key = `Image${weather}`;
-    const CustomImage = Images.hasOwnProperty(key) ? (Images as any)[key] : null;
+    // const key = `Image${weather}`;
+    // const CustomImage = Images.hasOwnProperty(key) ? (Images as any)[key] : null;
 
     return (
         <LinearGradient
@@ -27,7 +27,7 @@ export default function ForecastCardInfo({data}: PropsType) {
             <Text style={styles.Date}>
                 {data.item.date}
             </Text>
-            {CustomImage && <CustomImage style={styles.Image}/>}
+            {/*{CustomImage && <CustomImage style={styles.Image}/>}*/}
             <Text style={styles.Temp}>
                 {data.item.temp} C°
             </Text>

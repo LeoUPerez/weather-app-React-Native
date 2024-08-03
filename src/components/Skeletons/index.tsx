@@ -1,10 +1,9 @@
 import {Skeleton} from "moti/skeleton";
 import {useContext} from "react";
-import {weatherContext} from "../../contexts/WeatherContext";
+import {weatherContext} from "../../contexts";
 
 export function ForecastCardInfoSkeleton(){
     const Context = useContext(weatherContext);
-
     return(
         <Skeleton
             show={Context.loading}
@@ -20,7 +19,6 @@ export function ForecastCardInfoSkeleton(){
 }
 
 export default function FavoriteCityItemSkeleton({horizontal}: {horizontal: boolean}){
-
     return(
         <Skeleton
             show={true}
