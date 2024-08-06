@@ -23,24 +23,31 @@ export default function HomeView() {
     }, []);
 
     return (
-        <View style={styles.container}>
-            <WeatherContextProvider>
-                <ExpoCamContextProvider>
-                    <ExpoCam/>
-                    <Header/>
-                </ExpoCamContextProvider>
-                <EstimatedDayTemp/>
-                <EstimatedDayForecast/>
-                <View style={styles.ContainerForecastStyle}>
-                    <View style={styles.DaysForecastHeader}>
-                        <Text style={{fontWeight: "bold", color: "rgb(33, 97, 140)"}}>
-                            Today
-                        </Text>
+        <View style={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(13, 151, 242, 0.15)",
+            borderRadius: 10,
+        }}>
+            <View style={styles.container}>
+                <WeatherContextProvider>
+                    <ExpoCamContextProvider>
+                        <ExpoCam/>
+                        <Header/>
+                    </ExpoCamContextProvider>
+                    <EstimatedDayTemp/>
+                    <EstimatedDayForecast/>
+                    <View style={styles.ContainerForecastStyle}>
+                        <View style={styles.DaysForecastHeader}>
+                            <Text style={{fontWeight: "bold", color: "rgb(33, 97, 140)"}}>
+                                Today
+                            </Text>
+                        </View>
+                        <EstimatedFiveDayForecast/>
                     </View>
-                    <EstimatedFiveDayForecast/>
-                </View>
-                <FavoritesCities horizontal={true}/>
-            </WeatherContextProvider>
+                    <FavoritesCities horizontal={true}/>
+                </WeatherContextProvider>
+            </View>
         </View>
     );
 }

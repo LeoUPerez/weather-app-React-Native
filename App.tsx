@@ -16,19 +16,27 @@ export default function App() {
     }, []);
 
     return (
-        <View style={styles.container_style}>
-            <DataBaseContextProvider>
-                <RouterNavigator/>
-            </DataBaseContextProvider>
+        <View style={{
+            width: "100%",
+            backgroundColor: "rgba(13, 151, 242, 0.15)",
+            display: "flex",
+            alignItems: "center",
+        }}>
+            <View style={styles.container_style}>
+                <DataBaseContextProvider>
+                    <RouterNavigator/>
+                </DataBaseContextProvider>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container_style: {
-        backgroundColor: "rgba(13, 151, 242, 0.15)",
-        width: "100%",
-        minHeight: windowHeight - 30,
-        marginTop: 30,
+        width: 430,
+        height: 875,
+        marginTop: 15,
+        // minHeight: windowHeight - 30,
+        // padding: 20,
     },
 });
